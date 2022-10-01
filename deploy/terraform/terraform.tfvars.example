@@ -1,0 +1,6 @@
+project_id            = "<PROJECT_ID>"
+region                = "europe-central2"
+zone                  = "europe-central2-a"
+gke_num_nodes         = 1
+gke_node_machine_type = "e2-medium"
+gke_node_disk_size    = 20
