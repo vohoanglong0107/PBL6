@@ -35,6 +35,7 @@ locals {
   gke_cluster_name       = "${var.project_id}-gke"
   vpc_name               = "${var.project_id}-vpc"
   subnet_name            = "${var.project_id}-subnet"
+  router_name            = "${var.project_id}-router"
   pods_ip_range_name     = "${var.project_id}-pods-ip-range"
   services_ip_range_name = "${var.project_id}-services-ip-range"
   ingress_pool_name      = "${var.project_id}-ingress-pool"

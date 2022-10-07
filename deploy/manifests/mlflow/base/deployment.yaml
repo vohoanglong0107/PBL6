@@ -1,0 +1,40 @@
+# create mlflow deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  labels:
+    app: mlflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+        - name: mlflow
+          image: mamlong34/mlflow
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MLFLOW_S3_ENDPOINT_URL
+              value: http://minio-service:9000
+            - name: MLFLOW_S3_IGNORE_TLS
+              value: "true"
+            - name: MINIO_BUCKET_NAME
+              value: "mlflow"
+            - name: MINIO_ACCESS_KEY
+              value: "minio"
+            - name: MINIO_SECRET_KEY
+              value: "minio123"
+            - name: BACKEND_STORE_URL
+              value: "postgresql://postgres:postgres@postgresql-service:5432/postgres"
+          resources:
+            requests:
+              cpu: 20m
+              memory: 100Mi

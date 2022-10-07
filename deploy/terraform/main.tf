@@ -106,7 +106,24 @@ module "vpc" {
   ]
 }
 
+module "cloud_router" {
+  source  = "terraform-google-modules/cloud-router/google"
+  version = "~> 0.4"
+  project = var.project_id
+  name    = local.router_name
+  network = module.vpc.network_name
+  region  = var.region
+
+  # Allow nodes to access the internet to pull images from other registries.
+  nats = [{
+    name = "docker-gateway"
+  }]
+}
+
 module "gke" {
+  depends_on = [
+    module.vpc
+  ]
   source             = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version            = "~> 23.1.0"
   kubernetes_version = "1.22.12-gke.1200"
@@ -122,9 +139,13 @@ module "gke" {
   ip_range_services      = local.services_ip_range_name
   create_service_account = true
 
-  add_cluster_firewall_rules = false
-  http_load_balancing        = false
-  enable_private_nodes       = true
+  // For Kubeflow webhooks
+  add_cluster_firewall_rules        = true
+  add_master_webhook_firewall_rules = true
+  // all webhooks ports, 4443 for kubeflow's admission-webhook-service
+  firewall_inbound_ports = ["4443", "8443", "9443", "15017"]
+  http_load_balancing    = false
+  enable_private_nodes   = true
 
   remove_default_node_pool = true
 
@@ -171,6 +192,13 @@ module "gke" {
         effect = "NO_SCHEDULE"
       }
     ]
+  }
+
+  node_pools_labels = {
+    all = {}
+    "${local.ingress_pool_name}" = {
+      dedicated = "ingress"
+    }
   }
 
   node_pools_tags = {
