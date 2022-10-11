@@ -1,0 +1,15 @@
+controller:
+  dnsPolicy: ClusterFirstWithHostNet
+  hostNetwork: true
+  nodeSelector:
+    kubernetes.io/os: linux
+    dedicated: ingress
+  service:
+    enabled: false
+    external:
+      enabled: false
+  tolerations:
+    - key: dedicated
+      operator: Equal
+      value: ingress
+      effect: NoSchedule
