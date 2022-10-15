@@ -106,20 +106,6 @@ module "vpc" {
   ]
 }
 
-module "cloud_router" {
-  source  = "terraform-google-modules/cloud-router/google"
-  version = "~> 0.4"
-  project = var.project_id
-  name    = local.router_name
-  network = module.vpc.network_name
-  region  = var.region
-
-  # Allow nodes to access the internet to pull images from other registries.
-  nats = [{
-    name = "docker-gateway"
-  }]
-}
-
 module "gke" {
   depends_on = [
     module.vpc
