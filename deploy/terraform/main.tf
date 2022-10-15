@@ -221,11 +221,3 @@ module "kubeip" {
   cluster_name = local.gke_cluster_name
   project_id   = var.project_id
 }
-
-module "k8s-config" {
-  source       = "./k8s-config"
-  ingress_pool = local.ingress_pool_name
-  depends_on = [
-    module.kubeip
-  ]
-}
