@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: gitopsdemo
+  name: argocd
   namespace: argocd
 spec:
   generators:
@@ -10,6 +10,8 @@ spec:
         revision: "deploy-k8s-cd"
         directories:
           - path: deploy/manifests/argocd
+          - path: deploy/manifests/istio
+          - path: deploy/manifests/cert-manager
 
   template:
     metadata:
@@ -22,12 +24,8 @@ spec:
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: "{{path.basename}}"
       syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
         automated:
-          allowEmpty: true
           prune: true
           # remove the this after a traumatizing experience of
           # not being able to remove or update argocd itself

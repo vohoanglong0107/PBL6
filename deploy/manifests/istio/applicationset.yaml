@@ -25,3 +25,6 @@ spec:
       syncPolicy:
         automated:
           prune: true
+          # under no circumstances should this be true
+          # as istiod will manage itself
+          # selfHeal: true
