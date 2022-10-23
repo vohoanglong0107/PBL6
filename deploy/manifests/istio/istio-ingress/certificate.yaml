@@ -7,6 +7,6 @@ spec:
   dnsNames:
     - pbl6.mamlong34.monster
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: Issuer
     group: cert-manager.io
