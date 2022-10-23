@@ -1,0 +1,15 @@
+source:
+  kind: Gateway
+  name: istio-egressgateway
+  apiVersion: networking.istio.io/v1beta1
+targets:
+  - select:
+      group: networking.istio.io
+      version: v1alpha3
+      kind: VirtualService
+    fieldPaths:
+      - spec.gateways.0
+      - spec.http.[name=inbound].route.0.destination.host
+      - spec.http.[name=outbound].match.0.gateways.0
+      - spec.tls.0.route.0.destination.host
+      - spec.tls.1.match.0.gateways.0

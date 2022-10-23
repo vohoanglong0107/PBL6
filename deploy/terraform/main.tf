@@ -106,20 +106,6 @@ module "vpc" {
   ]
 }
 
-module "cloud_router" {
-  source  = "terraform-google-modules/cloud-router/google"
-  version = "~> 0.4"
-  project = var.project_id
-  name    = local.router_name
-  network = module.vpc.network_name
-  region  = var.region
-
-  # Allow nodes to access the internet to pull images from other registries.
-  nats = [{
-    name = "docker-gateway"
-  }]
-}
-
 module "gke" {
   depends_on = [
     module.vpc
@@ -146,6 +132,11 @@ module "gke" {
   firewall_inbound_ports = ["4443", "8443", "9443", "15017"]
   http_load_balancing    = false
   enable_private_nodes   = true
+
+  // disable logging for small cluster
+  logging_service = "none"
+
+  grant_registry_access = true
 
   remove_default_node_pool = true
 

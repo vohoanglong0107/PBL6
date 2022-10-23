@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt-prod
-  namespace: istio-system
 spec:
   acme:
     # The ACME server URL
@@ -16,4 +15,4 @@ spec:
     solvers:
       - http01:
           ingress:
-            class: nginx
+            class: istio

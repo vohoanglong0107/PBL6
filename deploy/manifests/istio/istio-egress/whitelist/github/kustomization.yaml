@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - "../external-service/overlays/tls"
+namePrefix: github-
+
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: external-host
+    envs:
+      - "params.env"
+replacements:
+  - path: "replacements.yaml"

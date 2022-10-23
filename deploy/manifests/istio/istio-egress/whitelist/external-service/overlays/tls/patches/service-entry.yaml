@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: service-entry
+spec:
+  ports:
+    - name: tls
+      number: 443
+      protocol: TLS
+    - name: http-port
+      number: 80
+      protocol: HTTP

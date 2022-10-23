@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/vohoanglong0107/PBL6
+        revision: "deploy-k8s-cd"
+        directories:
+          - path: deploy/manifests/argocd
+          - path: deploy/manifests/istio
+          - path: deploy/manifests/cert-manager
+
+  template:
+    metadata:
+      name: "{{path.basename}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/vohoanglong0107/PBL6
+        targetRevision: "deploy-k8s-cd"
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          # remove the this after a traumatizing experience of
+          # not being able to remove or update argocd itself
+          # by kubectl
+          # selfHeal: true

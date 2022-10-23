@@ -1,0 +1,34 @@
+---
+# Source: gateway/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: istio-egressgateway
+  namespace: istio-egress
+  labels:
+    helm.sh/chart: gateway-1.15.2
+    app: istio-egressgateway
+    istio: egressgateway
+    app.kubernetes.io/version: "1.15.2"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: istio-egressgateway
+  annotations:
+    {}
+spec:
+  type: ClusterIP
+  ports:
+    - name: status-port
+      port: 15021
+      protocol: TCP
+      targetPort: 15021
+    - name: http2
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 443
+  selector:
+    app: istio-egressgateway
+    istio: egressgateway

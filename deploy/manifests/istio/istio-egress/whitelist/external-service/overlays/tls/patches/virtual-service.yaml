@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: virtual-service
+spec:
+  tls:
+    - match:
+        - gateways:
+            - mesh
+          port: 443
+          sniHosts:
+            - EXTERNAL_HOST
+      route:
+        - destination:
+            host: EGRESS_GATEWAY
+            port:
+              number: 443
+      # tls does not support name matching like http, so we have to use the index
+      # name: inbound
+    - match:
+        - gateways:
+            - EGRESS_GATEWAY
+          port: 443
+          sniHosts:
+            - EXTERNAL_HOST
+      route:
+        - destination:
+            host: EXTERNAL_HOST
+            port:
+              number: 443
+      # name: outbound

@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-egressgateway
+  namespace: istio-egress
+spec:
+  template:
+    spec:
+      nodeSelector:
+        dedicated: ingress
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: ingress
+          effect: NoSchedule

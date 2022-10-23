@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istio
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/vohoanglong0107/PBL6
+        revision: "deploy-k8s-cd"
+        directories:
+          - path: deploy/manifests/istio/*
+
+  template:
+    metadata:
+      name: "{{path.basename}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/vohoanglong0107/PBL6
+        targetRevision: "deploy-k8s-cd"
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          # under no circumstances should this be true
+          # as istiod will manage itself
+          # selfHeal: true

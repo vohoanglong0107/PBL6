@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-ingressgateway
+  namespace: istio-ingress
+spec:
+  template:
+    spec:
+      nodeSelector:
+        dedicated: ingress
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: ingress
+          effect: NoSchedule
+      containers:
+        - name: istio-proxy
+          # Of all options available, this is the only one that works
+          # NodePort only support port 30000-32767
+          # hostnetwork doest not work as istio use sysctl
+          # to set net.ipv4.ip_local_port_range
+          # ClusterIP with externalIPs does not work as well (not sure why)
+          ports:
+            - name: http2
+              containerPort: 80
+              protocol: TCP
+              hostPort: 80
+            - name: https
+              containerPort: 443
+              protocol: TCP
+              hostPort: 443
+            - name: "status-port"
+              containerPort: 15021
+              protocol: TCP
+              hostPort: 15021

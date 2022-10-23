@@ -1,0 +1,6 @@
+gateway:
+  name: istio-ingressgateway
+  service:
+    type: None
+  autoscaling:
+    enabled: false

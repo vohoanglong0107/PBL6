@@ -1,0 +1,68 @@
+---
+# Source: gateway/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-egressgateway
+  namespace: istio-egress
+  labels:
+    helm.sh/chart: gateway-1.15.2
+    app: istio-egressgateway
+    istio: egressgateway
+    app.kubernetes.io/version: "1.15.2"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: istio-egressgateway
+  annotations:
+    {}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: istio-egressgateway
+      istio: egressgateway
+  template:
+    metadata:
+      annotations:
+        inject.istio.io/templates: gateway
+        prometheus.io/path: /stats/prometheus
+        prometheus.io/port: "15020"
+        prometheus.io/scrape: "true"
+        sidecar.istio.io/inject: "true"
+      labels:
+        sidecar.istio.io/inject: "true"
+        app: istio-egressgateway
+        istio: egressgateway
+    spec:
+      serviceAccountName: istio-egressgateway
+      securityContext:
+        # Safe since 1.22: https://github.com/kubernetes/kubernetes/pull/103326
+        sysctls:
+        - name: net.ipv4.ip_unprivileged_port_start
+          value: "0"
+      containers:
+        - name: istio-proxy
+          # "auto" will be populated at runtime by the mutating webhook. See https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#customizing-injection
+          image: auto
+          securityContext:
+            # Safe since 1.22: https://github.com/kubernetes/kubernetes/pull/103326
+            capabilities:
+              drop:
+              - ALL
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1337
+            runAsGroup: 1337
+            runAsNonRoot: true
+          env:
+          ports:
+          - containerPort: 15090
+            protocol: TCP
+            name: http-envoy-prom
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 1024Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi

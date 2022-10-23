@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: istio-egress
+resources:
+  - namespace.yaml
+  - gateway.yaml
+  - gateway/templates/deployment.yaml
+  - gateway/templates/service.yaml
+  - gateway/templates/serviceaccount.yaml
+  - gateway/templates/role.yaml
+  - whitelist/lets-encrypt-prod
+  - whitelist/lets-encrypt-staging
+  - whitelist/own-host
+  - whitelist/github
+  - whitelist/raw-githubusercontent
+patchesStrategicMerge:
+  - patches/internet-access.yaml
+replacements:
+  - path: "replacements/egress-gateway.yaml"
