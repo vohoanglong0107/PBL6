@@ -29,4 +29,7 @@ spec:
         automated:
           allowEmpty: true
           prune: true
-          selfHeal: true
+          # remove the this after a traumatizing experience of
+          # not being able to remove or update argocd itself
+          # by kubectl
+          # selfHeal: true
