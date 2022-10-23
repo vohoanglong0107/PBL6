@@ -12,6 +12,7 @@ resources:
   - whitelist/lets-encrypt-prod
   - whitelist/lets-encrypt-staging
   - whitelist/own-host
+  - whitelist/github
 patchesStrategicMerge:
   - patches/internet-access.yaml
 replacements:
