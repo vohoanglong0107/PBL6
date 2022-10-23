@@ -1,0 +1,5 @@
+name: istio-egressgateway
+service:
+  type: ClusterIP
+autoscaling:
+  enabled: false
