@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: cluster-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      # doing this will make all request redirect to https
+      # not good when doing http challenge
+      # instead, we will use VirtualService to redirect
+      # tls:
+      #   httpsRedirect: true
+      hosts:
+        - "pbl6.mamlong34.monster"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: letsencrypt-crt-secret
+      hosts:
+        - "pbl6.mamlong34.monster"
