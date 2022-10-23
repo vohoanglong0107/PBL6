@@ -133,6 +133,9 @@ module "gke" {
   http_load_balancing    = false
   enable_private_nodes   = true
 
+  // disable logging for small cluster
+  logging_service = "none"
+
   grant_registry_access = true
 
   remove_default_node_pool = true
