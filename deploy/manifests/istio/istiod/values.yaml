@@ -1,0 +1,19 @@
+istiod:
+  pilot:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 1024Mi
+  global:
+    hub: "gcr.io/istio-release"
+    proxy:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
