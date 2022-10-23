@@ -1,0 +1,52 @@
+cert-manager:
+  installCRDs: true
+  global:
+    leaderElection:
+      namespace: "cert-manager"
+  image:
+    repository: "europe-docker.pkg.dev/pbl6-363916/mirror/cert-manager-controller"
+  tag: "v1.10.0"
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 200m
+      memory: 1024Mi
+  extraArgs:
+    - --acme-http01-solver-image=europe-docker.pkg.dev/pbl6-363916/mirror/cert-manager-acmesolver:v1.10.0
+  webhook:
+    image:
+      repository: "europe-docker.pkg.dev/pbl6-363916/mirror/cert-manager-webhook"
+      tag: "v1.10.0"
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 1024Mi
+  cainjector:
+    image:
+      repository: "europe-docker.pkg.dev/pbl6-363916/mirror/cert-manager-cainjector"
+      tag: "v1.10.0"
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 1024Mi
+  startupapicheck:
+    podLabels:
+      sidecar.istio.io/inject: "false"
+    image:
+      repository: "europe-docker.pkg.dev/pbl6-363916/mirror/cert-manager-ctl"
+      tag: "v1.10.0"
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 1024Mi

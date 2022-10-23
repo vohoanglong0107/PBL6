@@ -1,5 +1,9 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,turbo,nextjs,terraform,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,turbo,nextjs,terraform,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/node,helm,turbo,nextjs,terraform,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,helm,turbo,nextjs,terraform,visualstudiocode
+
+### Helm ###
+# Chart dependencies
+**/charts/*.tgz
 
 ### NextJS ###
 # Dependencies
@@ -227,10 +231,4 @@ terraform.rc
 .history
 .ionide
 
-# Support for Project snippet scope
-.vscode/*.code-snippets
-
-# Ignore code-workspaces
-*.code-workspace
-
-# End of https://www.toptal.com/developers/gitignore/api/node,turbo,nextjs,terraform,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/node,helm,turbo,nextjs,terraform,visualstudiocode
