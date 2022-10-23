@@ -1,0 +1,13 @@
+apiVersion: v2
+name: istio-base
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.14.5"
+dependencies:
+  - name: base
+    repository: https://istio-release.storage.googleapis.com/charts
+    version: 1.14.5
+    alias: istio-base
