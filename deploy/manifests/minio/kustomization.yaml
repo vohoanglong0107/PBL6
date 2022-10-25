@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - "templates/standalone/deployment.yaml"
+  - "templates/secrets.yaml"
+  - "templates/service.yaml"
+  - "templates/pvc.yaml"
+  - "templates/serviceaccount.yaml"
+  - "namespace.yaml"
+namespace: minio
