@@ -2,14 +2,16 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: argocd
-  namespace: argocd
 spec:
   hosts:
     - "pbl6.mamlong34.monster"
   gateways:
     - istio-ingress/cluster-gateway
   http:
-    - route:
+    - match:
+        - uri:
+            prefix: /argocd/
+      route:
         - destination:
             host: argocd-server.argocd.svc.cluster.local
             port:
