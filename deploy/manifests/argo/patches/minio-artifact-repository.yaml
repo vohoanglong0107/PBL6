@@ -1,0 +1,27 @@
+# https://github.com/kubeflow/pipelines/blob/master/manifests/kustomize/third-party/argo/base/workflow-controller-configmap-patch.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: workflow-controller-configmap
+  namespace: argo
+data:
+  artifactRepository: |
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucket: argo
+      createBucketIfNotPresent:
+        objectLocking: false
+      keyFormat: "artifacts\
+        /{{workflow.name}}\
+        /{{workflow.creationTimestamp.Y}}\
+        /{{workflow.creationTimestamp.m}}\
+        /{{workflow.creationTimestamp.d}}\
+        /{{pod.name}}"
+      insecure: true
+      accessKeySecret:
+        name: minio-artifact
+        key: accesskey
+      secretKeySecret:
+        name: minio-artifact
+        key: secretkey
