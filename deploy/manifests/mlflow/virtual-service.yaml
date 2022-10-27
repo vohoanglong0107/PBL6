@@ -4,15 +4,17 @@ metadata:
   name: mlflow
 spec:
   gateways:
-    - kubeflow/kubeflow-gateway
+    - istio-ingress/cluster-gateway
   hosts:
     - "*"
   http:
     - match:
         - uri:
             prefix: /mlflow/
+      rewrite:
+        uri: /
       route:
         - destination:
-            host: mlflow.mlflow.svc.cluster.local
+            host: mlflow
             port:
               number: 80
