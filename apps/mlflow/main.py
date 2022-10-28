@@ -93,7 +93,7 @@ if __name__ == "__main__":
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", default="5000")
     parser.add_argument("--workers", default="1")
-    parser.add_argument("--static-prefix", default="/static")
+    parser.add_argument("--static-prefix", default="/")
 
     args = parser.parse_args()
     main(args)

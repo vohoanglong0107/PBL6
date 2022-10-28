@@ -4,14 +4,11 @@ metadata:
   name: argocd
 spec:
   hosts:
-    - "pbl6.mamlong34.monster"
+    - "argocd.pbl6.mamlong34.monster"
   gateways:
     - istio-ingress/cluster-gateway
   http:
-    - match:
-        - uri:
-            prefix: /argocd/
-      route:
+    - route:
         - destination:
             host: argocd-server.argocd.svc.cluster.local
             port:

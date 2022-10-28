@@ -4,6 +4,7 @@ resources:
   - https://github.com/argoproj/argo-workflows/releases/download/v3.4.2/install.yaml
   - namespace.yaml
   - minio-artifact-secret.yaml
+  - virtual-service.yaml
 images:
   - name: quay.io/argoproj/argocli:v3.4.2
     newName: europe-docker.pkg.dev/pbl6-363916/mirror/argocli

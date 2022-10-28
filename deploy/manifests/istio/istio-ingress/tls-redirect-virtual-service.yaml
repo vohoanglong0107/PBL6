@@ -5,6 +5,9 @@ metadata:
 spec:
   hosts:
     - "pbl6.mamlong34.monster"
+    - "argocd.pbl6.mamlong34.monster"
+    - "mlflow.pbl6.mamlong34.monster"
+    - "argo.pbl6.mamlong34.monster"
   gateways:
     - cluster-gateway
   http:

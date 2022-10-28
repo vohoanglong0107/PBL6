@@ -1,18 +1,21 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: mlflow
+  name: argo
+  namespace: argo
 spec:
   gateways:
     - istio-ingress/cluster-gateway
   hosts:
-    - "mlflow.pbl6.mamlong34.monster"
+    - "argo.pbl6.mamlong34.monster"
   http:
     - match:
         - uri:
             prefix: /
+      rewrite:
+        uri: /
       route:
         - destination:
-            host: mlflow
+            host: argo-server
             port:
-              number: 80
+              number: 2746

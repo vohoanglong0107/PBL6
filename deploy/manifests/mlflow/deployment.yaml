@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: mlflow
-          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow:0.0.3
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow:0.0.4
           imagePullPolicy: IfNotPresent
           command:
             - "python"
@@ -28,7 +28,7 @@ spec:
             - "--workers"
             - "1"
             - "--static-prefix"
-            - "/mlflow"
+            - "/"
           ports:
             - containerPort: 5000
           env:
@@ -66,6 +66,13 @@ spec:
                   key: password
             - name: DB_NAME
               value: "mlflow"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            timeoutSeconds: 5
           resources:
             requests:
               cpu: 20m
