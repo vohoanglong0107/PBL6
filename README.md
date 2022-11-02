@@ -8,6 +8,14 @@ Following this [cheapest k8s cluster](https://redmaple.tech/blogs/affordable-kub
 
 Follow the install instructions in [deploy/manifests/README.md](deploy/manifests/README.md)
 
+## Dev with skaffold
+
+```bash
+skaffold dev --no-prune=false --cache-artifacts=false
+# to dev only a specific config
+skaffold dev --no-prune=false --cache-artifacts=false --module train-mnist
+```
+
 ## Troubleshooting
 
 ### Error: Error creating NodePool

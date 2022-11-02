@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: mlflow
-          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow:0.0.4
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow:0.0.5
           imagePullPolicy: IfNotPresent
           command:
             - "python"
