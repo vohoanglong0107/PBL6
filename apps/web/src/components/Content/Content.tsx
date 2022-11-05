@@ -3,6 +3,7 @@ import styles from "./Content.module.scss";
 import Image from "next/image";
 import Logo2 from "@/assets/logo2.svg";
 import Navbar from "../Navbar";
+import Banner from "../Banner";
 export default function Content() {
   return (
     <>
@@ -17,13 +18,14 @@ export default function Content() {
           <div className={styles.Contentleft}>
             <div className={styles.CoverTitle}>
               {/* <div className={styles.Text}> */}
-                <p className={styles.Title}>Have you</p>
-                <p className={styles.Title1}>
-                  ever had trouble listening <br/> to a piece of music but don{"'"}t know it{"'"}s name?
-                </p>
-                <p className={styles.Title2}>
-                  Don{"'"}t worry, Music RegZ will help you find it !
-                </p>
+              <p className={styles.Title}>Have you</p>
+              <p className={styles.Title1}>
+                ever had trouble listening <br /> to a piece of music but don
+                {"'"}t know it{"'"}s name?
+              </p>
+              <p className={styles.Title2}>
+                Don{"'"}t worry, Music RegZ will help you find it !
+              </p>
               {/* </div> */}
 
               <div className={styles.UploadFile}>
@@ -38,13 +40,7 @@ export default function Content() {
           </div>
           <div className={styles.ContentRight}>
             <div className={styles.Logo2}>
-              <Image
-                className="max-w-xs h-auto"
-                src={Logo2}
-                alt="image description"
-                height={700}
-                width={700}
-              />
+              <Banner />
             </div>
           </div>
         </div>
