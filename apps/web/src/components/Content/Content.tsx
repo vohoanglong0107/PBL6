@@ -4,10 +4,10 @@ import Image from "next/image";
 import Logo2 from "@/assets/logo2.svg";
 import Navbar from "../Navbar";
 import Banner from "../Banner";
+import SongSearchForm from "../SongSearchForm";
 export default function Content() {
   return (
     <>
-      {/* <Navbar /> */}
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -15,29 +15,7 @@ export default function Content() {
       <br />
       <section className={styles.Section}>
         <div className={styles.Content}>
-          <div className={styles.Contentleft}>
-            <div className={styles.CoverTitle}>
-              {/* <div className={styles.Text}> */}
-              <p className={styles.Title}>Have you</p>
-              <p className={styles.Title1}>
-                ever had trouble listening <br /> to a piece of music but don
-                {"'"}t know it{"'"}s name?
-              </p>
-              <p className={styles.Title2}>
-                Don{"'"}t worry, Music RegZ will help you find it !
-              </p>
-              {/* </div> */}
-
-              <div className={styles.UploadFile}>
-                {/* <input className={styles.Input} /> */}
-                <label className={styles.Label1} htmlFor="Label1">
-                  Click the right button to upload file
-                </label>
-                <input type={"file"} className={styles.Button1} />
-                <input type={"submit"} className={styles.Button2} />
-              </div>
-            </div>
-          </div>
+          <SongSearchForm />
           <div className={styles.ContentRight}>
             <div className={styles.Logo2}>
               <Banner />
