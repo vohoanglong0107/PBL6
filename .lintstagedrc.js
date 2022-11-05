@@ -1,5 +1,5 @@
 module.exports = {
-  "*.{json,md,js,jsx,ts,tsx}": "prettier --write",
+  "*.{json,md,css,scss,js,jsx,ts,tsx}": "prettier --write",
   Dockerfile: (absoluteFileNames) =>
     absoluteFileNames.map((absoluteFileName) => {
       const path = require("path");
