@@ -55,7 +55,7 @@ export default function Navbar() {
                 width={65}
               />
               <span
-                className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+                className="self-center text-2xl font-semibold whitespace-nowrap "
                 style={{ marginLeft: "15px", fontSize: "40px" }}
               >
                 Music RegZ
@@ -75,7 +75,7 @@ export default function Navbar() {
             >
               <a
                 href="/"
-                className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
+                className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
                 Home
               </a>
@@ -86,7 +86,7 @@ export default function Navbar() {
             >
               <a
                 href="/supportList/"
-                className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
+                className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
                 Support List
               </a>
@@ -97,7 +97,7 @@ export default function Navbar() {
             >
               <a
                 href="/aboutUs/"
-                className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
+                className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
                 About Us
               </a>
@@ -108,7 +108,7 @@ export default function Navbar() {
             >
               <a
                 href="/contact/"
-                className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
+                className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
                 Contact
               </a>
@@ -228,16 +228,7 @@ export default function Navbar() {
           </a>
         </div>
       </div>
-
-      {/* <div className="px-4 mx-auto max-w-8xl lg:px-4 lg:text-center">
-        <h1 className="mb-4  text-4xl font-bold tracking-tight text-gray-900 lg:font-extrabold lg:text-6xl lg:leading-none dark:text-white lg:text-left xl:px-36 lg:mb-7">
-          Have you{" "}
-        </h1>
-        <h1 className="mb-4  text-4xl font-bold tracking-tight text-gray-900 lg:font-extrabold lg:text-6xl lg:leading-none dark:text-white lg:text-left xl:px-36 lg:mb-7">
-          {" "}
-          ever had trouble listening to a piece of music but dont know its name?
-        </h1>
-      </div> */}
+      
     </>
   );
 }
