@@ -1,11 +1,11 @@
 import React from "react";
-import classNames from "classnames";
+import className from "classnames";
 import styles from "./ShowResult.module.scss";
 import Image from "next/image";
-import Logo from "@/assets/logo.svg";
-import Avt from "@/assets/avt.jpg";
+
 import Lover from "@/assets/lover.jpg";
 import Head from "next/head";
+import Banner from "../Banner";
 
 
 export default function ShowResult() {
@@ -45,13 +45,7 @@ export default function ShowResult() {
 
         </div>
         <div className={styles.image_avt}>
-          <Image
-            className="max-w-xs h-auto"
-            src={Avt}
-            alt="image description"
-            height={500}
-            width={400}
-          />
+          <Banner />
         </div>
       </section>
     </>
