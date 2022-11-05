@@ -1,106 +1,216 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
-@import url("https://fonts.googleapis.com/css?family=Charm:400");
-
 .Section {
   display: flex;
   justify-content: center;
-}
-.Content {
-  margin-top: 30px;
-}
-.info_song {
-  .info {
-    display: flex;
-    justify-content: center;
 
-    .songs {
-      display: inline-block;
-      .song {
-        // background-color: aqua;
-        font-size: 40px;
-        color: #445964;
+  .Content {
+    //margin-top: 10px;
+    .info_song {
+      font-family: "Arial Narrow Bold", sans-serif;
+      justify-content: center;
+      .info {
+        display: flex;
+        .songs {
+          display: inline-block;
+          font-family: cursive;
+          .song {
+            // background-color: aqua;
+            font-size: 35px;
+            color: #445964;
+            text-align: center;
+            padding: 24px 0px;
+            overflow: clip;
+            height: 80px;
+            font-weight: 900;
+          }
+          .song_name {
+            font-size: 45px;
+            color: #445964;
+            font-weight: 900;
+            text-align: center;
+            padding: 24px 0px;
+            overflow: clip;
+            height: 100px;
+          }
+          .sub_song_name1 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
 
-        text-align: center;
-        padding: 50px 60px;
-      }
-      .song_name {
-        font-size: 40px;
-        color: #000000;
-        font-weight: 500;
-        text-align: center;
-        padding: 50px 60px;
+            text-align: center;
+            font-weight: 900;
+            color: #445964;
+            font-size: 35px;
+          }
+          .sub_song_name2 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 900;
+            color: #445964;
+            font-size: 30px;
+          }
+          .sub_song_name3 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 900;
+            color: #445964;
+            font-size: 25px;
+          }
+          .sub_song_name4 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 900;
+            color: #445964;
+            font-size: 25px;
+          }
+        }
+        .artists {
+          display: inline-block;
+          font-family: monospace;
+          .artist {
+            // background-color: aqua;
+            font-size: 35px;
+            color: #445964;
+            font-weight: 250;
+            text-align: center;
+            padding: 24px 0px;
+            overflow: clip;
+            height: 80px;
+          }
+          .artist_name {
+            font-size: 45px;
+            color: #445964;
+            font-weight: 250;
+            text-align: center;
+            padding: 24px 0px;
+            overflow: clip;
+            height: 100px;
+          }
+          .sub_artist_name1 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 250;
+            color: #445964;
+            font-size: 35px;
+          }
+          .sub_artist_name2 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 250;
+            color: #445964;
+            font-size: 30px;
+          }
+          .sub_artist_name3 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 250;
+            color: #445964;
+            font-size: 25px;
+          }
+          .sub_artist_name4 {
+            padding: 24px 0px;
+            overflow: clip;
+            height: 70px;
+
+            text-align: center;
+            font-weight: 250;
+            color: #445964;
+            font-size: 25px;
+          }
+        }
       }
     }
-    .artists {
-      display: inline-block;
-      .artist {
-        // background-color: aqua;
-        font-size: 40px;
+    .UploadFile {
+      flex-direction: row;
+      align-items: center;
+      .Label1 {
+        background-color: rgba(160, 167, 171, 1);
         color: #445964;
-
+        border-radius: 10px;
+        max-width: 100%;
+        height: 40px;
+        border: none;
+        padding: 8px;
+        margin: 0 10px;
+        font-size: 17px;
+        font-weight: bold;
         text-align: center;
-        padding: 50px 60px;
+        overflow: clip;
       }
-      .artist_name {
-        font-size: 40px;
-        color: #000000;
-        font-weight: 500;
+      .Button1 {
+        background-color: rgba(38, 49, 56, 1);
+        color: #fff;
+        border-radius: 10px;
+        max-width: 100%;
+        height: 40px;
+        margin: 0 10px;
+        padding: 5px;
+        font-size: 17px;
+        font-weight: bold;
         text-align: center;
-        padding: 50px 60px;
       }
     }
   }
-}
-.UploadFile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  .Label1 {
-    background-color: rgba(160, 167, 171, 1);
-    color: #000;
-    border-radius: 10px;
-    max-width: 100%;
-    height: 40px;
-    border: none;
-    padding: 8px;
-    margin: 0 10px;
-    font-size: 17px;
-    font-weight: bold;
-    text-align: center;
-    overflow: hidden;
+  .image_avt {
+    width: 30%;
+    margin-top: 60px;
   }
-  .Button1 {
-    background-color: rgba(38, 49, 56, 1);
-    color: #fff;
-    border-radius: 10px;
-    max-width: 100%;
-    height: 40px;
-    margin: 0 10px;
-    padding: 5px;
-    font-size: 17px;
-    font-weight: bold;
-    text-align: center;
-  }
-}
-
-.image_avt {
-  margin: 30px 30px;
-  height: 700px;
-  width: 400px;
 }
 
 /* PC*/
 @media (min-width: 1024px) {
-  .info_song {
-    display: flex;
-    .image_Lover {
-      margin-top: 150px;
+  .Section {
+    width: 100%;
+    .Content {
+      width: 70%;
+      .info_song {
+        width: 100%;
+        display: flex;
+        .info {
+          width: 85%;
+          .songs {
+            width: 50%;
+          }
+          .artists {
+            width: 50%;
+          }
+        }
+        .image_Lover {
+          margin-top: 120px;
+          width: 15%;
+        }
+      }
+      .UploadFile {
+        display: flex;
+        margin-top: 50px;
+        justify-content: center;
+        .Label1 {
+          width: 400px;
+        }
+        .Button1 {
+          width: 400px;
+        }
+      }
     }
-  }
-  .UploadFile {
-    margin-top: 64px;
-    justify-content: center;
+    .image_avt {
+    }
   }
 }
 
@@ -108,78 +218,93 @@
 @media (min-width: 740px) and (max-width: 1024px) {
   .Section {
     display: block;
-  }
-  .info_song {
-    display: block;
-    .image_Lover {
-      margin-top: 50px;
-      margin-bottom: 50px;
-      text-align: center;
+    width: 100%;
+    .Content {
+      width: 100%;
+      .info_song {
+        display: block;
+        .info {
+          justify-content: center;
+          width: 100%;
+          .songs {
+            width: 50%;
+          }
+          .artists {
+            width: 50%;
+          }
+        }
+        .image_Lover {
+          margin-top: 50px;
+          margin-bottom: 50px;
+          text-align: center;
+          width: 100%;
+        }
+      }
+      .UploadFile {
+        display: grid;
+        justify-content: center;
+        .Label1 {
+          margin-bottom: 16px;
+          margin-top: 20px;
+          max-width: 100%;
+        }
+        .Button1 {
+          margin-bottom: 32px;
+          margin-top: 16px;
+          // padding-left: 89px;
+          max-width: 100%;
+        }
+      }
     }
-    .info {
-      justify-content: center;
+    .image_avt {
+      display: none;
     }
-  }
-  .UploadFile {
-    display: grid;
-    /* text-align: -webkit-left; */
-    justify-content: center;
-    .Label1 {
-      margin-bottom: 16px;
-      margin-top: 20px;
-      max-width: 100%;
-    }
-    .Button1 {
-      margin-bottom: 32px;
-      margin-top: 16px;
-      // padding-left: 89px;
-      max-width: 100%;
-    }
-  }
-  .image_avt {
-    display: none;
   }
 }
 /* mobile*/
 @media (max-width: 740px) {
   .Section {
     display: block;
-  }
-  .info_song {
-    display: block;
-    .image_Lover {
-      margin-top: 50px;
-      margin-bottom: 50px;
-      text-align: center;
+    width: 100%;
+    .Content {
+      width: 100%;
+      .info_song {
+        display: block;
+        .info {
+          justify-content: center;
+          width: 100%;
+          .songs {
+            width: 50%;
+          }
+          .artists {
+            width: 50%;
+          }
+        }
+        .image_Lover {
+          margin-top: 50px;
+          margin-bottom: 50px;
+          text-align: center;
+          width: 100%;
+        }
+      }
+      .UploadFile {
+        display: grid;
+        justify-content: center;
+        .Label1 {
+          margin-bottom: 16px;
+          margin-top: 20px;
+          max-width: 100%;
+        }
+        .Button1 {
+          margin-bottom: 32px;
+          margin-top: 16px;
+          // padding-left: 89px;
+          max-width: 100%;
+        }
+      }
     }
-    .info {
-      display: block;
-      text-align: center;
+    .image_avt {
+      display: none;
     }
-  }
-  .UploadFile {
-    display: grid;
-    /* text-align: -webkit-left; */
-    justify-content: center;
-    text-align: center;
-    padding: 2rem 1.5rem;
-
-    .Label1 {
-      margin-bottom: 16px;
-      margin-top: 20px;
-      max-width: 100%;
-
-      // width: 300px;
-    }
-    .Button1 {
-      margin-bottom: 32px;
-      margin-top: 16px;
-      // width: 300px;
-      max-width: 100%;
-      //padding-left: 48px;
-    }
-  }
-  .image_avt {
-    display: none;
   }
 }
