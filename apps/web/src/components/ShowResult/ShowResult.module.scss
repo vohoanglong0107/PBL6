@@ -1,74 +1,63 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
-@import url('https://fonts.googleapis.com/css?family=Charm:400');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
+@import url("https://fonts.googleapis.com/css?family=Charm:400");
 
-
-
-.Section{
+.Section {
   display: flex;
   justify-content: center;
 }
-.Content{
-  
+.Content {
   margin-top: 30px;
 }
-.info_song{
-  
- 
-  .info{
+.info_song {
+  .info {
     display: flex;
-    justify-content: center;  
-    
+    justify-content: center;
 
-    .songs{
+    .songs {
       display: inline-block;
-      .song{
+      .song {
         // background-color: aqua;
         font-size: 40px;
         color: #445964;
-       
+
         text-align: center;
         padding: 50px 60px;
-      
-        
       }
-      .song_name{
+      .song_name {
         font-size: 40px;
         color: #000000;
         font-weight: 500;
         text-align: center;
         padding: 50px 60px;
       }
-      
     }
-    .artists{
+    .artists {
       display: inline-block;
-      .artist{
+      .artist {
         // background-color: aqua;
         font-size: 40px;
         color: #445964;
-       
+
         text-align: center;
         padding: 50px 60px;
-
       }
-      .artist_name{
+      .artist_name {
         font-size: 40px;
         color: #000000;
         font-weight: 500;
         text-align: center;
         padding: 50px 60px;
       }
-    } 
+    }
   }
-  
 }
 .UploadFile {
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+
   .Label1 {
-    background-color:  rgba(160, 167, 171, 1);
+    background-color: rgba(160, 167, 171, 1);
     color: #000;
     border-radius: 10px;
     max-width: 100%;
@@ -80,11 +69,9 @@
     font-weight: bold;
     text-align: center;
     overflow: hidden;
-   
-
   }
   .Button1 {
-    background-color:  rgba(38, 49, 56, 1);
+    background-color: rgba(38, 49, 56, 1);
     color: #fff;
     border-radius: 10px;
     max-width: 100%;
@@ -92,114 +79,107 @@
     margin: 0 10px;
     padding: 5px;
     font-size: 17px;
-   font-weight: bold;
-   text-align: center;
-   
-
+    font-weight: bold;
+    text-align: center;
   }
-
 }
-.image_avt
-{
+
+.image_avt {
   margin: 30px 30px;
+  height: 700px;
+  width: 400px;
 }
 
 /* PC*/
 @media (min-width: 1024px) {
-  .info_song{
+  .info_song {
     display: flex;
-    .image_Lover{
+    .image_Lover {
       margin-top: 150px;
     }
   }
-  .UploadFile{
+  .UploadFile {
     margin-top: 64px;
     justify-content: center;
   }
- 
 }
 
-
 /* tablet*/
-@media (min-width: 740px) and ( max-width: 1024px){
-  .Section{
+@media (min-width: 740px) and (max-width: 1024px) {
+  .Section {
     display: block;
   }
-  .info_song{
-   display: block;
-   .image_Lover{
+  .info_song {
+    display: block;
+    .image_Lover {
       margin-top: 50px;
       margin-bottom: 50px;
       text-align: center;
     }
-   .info{
+    .info {
       justify-content: center;
     }
   }
-  .UploadFile{
+  .UploadFile {
     display: grid;
     /* text-align: -webkit-left; */
     justify-content: center;
-    .Label1{
+    .Label1 {
       margin-bottom: 16px;
       margin-top: 20px;
       max-width: 100%;
     }
-    .Button1{
+    .Button1 {
       margin-bottom: 32px;
       margin-top: 16px;
       // padding-left: 89px;
       max-width: 100%;
-
     }
   }
-  .image_avt{
+  .image_avt {
     display: none;
   }
- 
 }
 /* mobile*/
-@media ( max-width: 740px){
-  .Section{
+@media (max-width: 740px) {
+  .Section {
     display: block;
   }
-  .info_song{
-   display: block;
-   .image_Lover{
+  .info_song {
+    display: block;
+    .image_Lover {
       margin-top: 50px;
       margin-bottom: 50px;
       text-align: center;
     }
-   .info{
-    display: block;
+    .info {
+      display: block;
       text-align: center;
     }
   }
-  .UploadFile{
+  .UploadFile {
     display: grid;
     /* text-align: -webkit-left; */
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      
-    .Label1{
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+
+    .Label1 {
       margin-bottom: 16px;
       margin-top: 20px;
       max-width: 100%;
-      
+
       // width: 300px;
-      
     }
-    .Button1{
+    .Button1 {
       margin-bottom: 32px;
       margin-top: 16px;
       // width: 300px;
       max-width: 100%;
       //padding-left: 48px;
-      
     }
   }
-  .image_avt{
+  .image_avt {
     display: none;
   }
 }
