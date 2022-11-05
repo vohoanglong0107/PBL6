@@ -17,6 +17,9 @@ spec:
       #   httpsRedirect: true
       hosts:
         - "pbl6.mamlong34.monster"
+        - "argocd.pbl6.mamlong34.monster"
+        - "mlflow.pbl6.mamlong34.monster"
+        - "argo.pbl6.mamlong34.monster"
     - port:
         number: 443
         name: https
@@ -26,3 +29,6 @@ spec:
         credentialName: letsencrypt-crt-secret
       hosts:
         - "pbl6.mamlong34.monster"
+        - "argocd.pbl6.mamlong34.monster"
+        - "mlflow.pbl6.mamlong34.monster"
+        - "argo.pbl6.mamlong34.monster"

@@ -1,0 +1,19 @@
+source:
+  kind: ConfigMap
+  name: external-host
+  apiVersion: v1
+  fieldPath: data.EXTERNAL_HOST
+targets:
+  - select:
+      group: networking.istio.io
+      version: v1alpha3
+      kind: ServiceEntry
+    fieldPaths:
+      - spec.hosts.0
+  - select:
+      group: networking.istio.io
+      version: v1alpha3
+      kind: VirtualService
+    fieldPaths:
+      - spec.hosts.0
+      - spec.http.[name=outbound].route.0.destination.host

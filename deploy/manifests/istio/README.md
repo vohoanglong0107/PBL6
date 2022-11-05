@@ -12,7 +12,7 @@ helm template istio-base --include-crds --kube-version $CLUSTER_K8S_VERSION -n i
 
 helm template istiod --include-crds --kube-version $CLUSTER_K8S_VERSION -n istio-system > istiod/helm-template.yaml
 
-helm template istio-egress istio/gateway  --include-crds --kube-version $CLUSTER_K8S_VERSION -n istio-egress --output-dir istio-egress -f istio-egress/values.yaml
+helm template istio-egress istio/gateway  --include-crds --kube-version $CLUSTER_K8S_VERSION -n istio-egress --output-dir istio-egress -f istio-egress/values.yaml --version 1.15.2
 
 helm template istio-ingress --include-crds --kube-version $CLUSTER_K8S_VERSION -n istio-ingress > istio-ingress/helm-template.yaml
 ```

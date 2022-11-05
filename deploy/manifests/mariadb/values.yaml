@@ -1,0 +1,15 @@
+image:
+  registry: europe-docker.pkg.dev/pbl6-363916/mirror
+  repository: mariadb
+  tag: 10.6.10-debian-11-r6
+auth:
+  rootPassword: "root"
+  database: ""
+primary:
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 10m
+    limits:
+      memory: 512Mi
+      cpu: 250m

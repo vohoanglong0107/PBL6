@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - "templates/primary/configmap.yaml"
+  - "templates/primary/statefulset.yaml"
+  - "templates/primary/svc.yaml"
+  - "templates/secrets.yaml"
+  - "templates/serviceaccount.yaml"
+  - "namespace.yaml"
+namespace: mariadb
