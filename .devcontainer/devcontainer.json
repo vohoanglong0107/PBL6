@@ -27,5 +27,17 @@
     "git": "os-provided",
     "node": "lts",
     "python": "3.8"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "streetsidesoftware.code-spell-checker",
+        "esbenp.prettier-vscode",
+        "GitHub.copilot",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "donjayamanne.githistory"
+      ]
+    }
   }
 }

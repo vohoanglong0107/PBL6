@@ -1,0 +1,82 @@
+# create mlflow deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  labels:
+    app: mlflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+        - name: mlflow
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow:0.0.5
+          imagePullPolicy: IfNotPresent
+          command:
+            - "python"
+          args:
+            - "main.py"
+            - "--port"
+            - "5000"
+            - "--workers"
+            - "1"
+            - "--static-prefix"
+            - "/"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: accesskey
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: secretkey
+            - name: MINIO_HOST
+              value: minio.minio.svc.cluster.local
+            - name: MINIO_PORT
+              value: "9000"
+            - name: MINIO_BUCKET_NAME
+              value: "mlflow"
+            - name: MLFLOW_S3_IGNORE_TLS
+              value: "true"
+            - name: DB_HOST
+              value: mariadb.mariadb.svc.cluster.local
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: DB_NAME
+              value: "mlflow"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 20m
+              memory: 200Mi
+            limits:
+              cpu: 100m
+              memory: 1024Mi

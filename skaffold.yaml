@@ -1,0 +1,41 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata:
+  name: mlflow
+build:
+  artifacts:
+    - image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow
+      context: apps/mlflow
+manifests:
+  kustomize:
+    paths:
+      - deploy/manifests/mlflow
+---
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata:
+  name: train-mnist
+build:
+  artifacts:
+    - image: europe-docker.pkg.dev/pbl6-363916/mirror/mnist-data-processing
+      context: apps/data_processing
+      docker:
+        dockerfile: Dockerfile
+    - image: europe-docker.pkg.dev/pbl6-363916/mirror/mnist-model-training
+      context: apps/model
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - deploy/manifests/user-spaces/ml/workflows/train-mnist.yaml
+deploy:
+  kubectl:
+    hooks:
+      before:
+        - host:
+            command:
+              - "kubectl"
+              - "delete"
+              - "-f"
+              - "deploy/manifests/user-spaces/ml/workflows/train-mnist.yaml"
+              - "--ignore-not-found"

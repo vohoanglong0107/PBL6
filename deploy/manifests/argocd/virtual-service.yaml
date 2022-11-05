@@ -2,10 +2,9 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: argocd
-  namespace: argocd
 spec:
   hosts:
-    - "pbl6.mamlong34.monster"
+    - "argocd.pbl6.mamlong34.monster"
   gateways:
     - istio-ingress/cluster-gateway
   http:

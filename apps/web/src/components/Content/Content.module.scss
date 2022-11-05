@@ -1,0 +1,93 @@
+.Section {
+  .Content {
+    width: 100%;
+    display: flex;
+    padding: 200 120 100 120;
+    .Contentleft {
+      width: 70%;
+      .CoverTitle {
+        width: 100%;
+        margin-left: 50px;
+        .Title {
+          font-size: 30px;
+          color: #445964;
+          font-weight: 400;
+          float: none;
+          margin-left: 100px;
+        }
+        .Title1 {
+          font-size: 50px;
+          font-weight: 500;
+          color: #445964;
+          float: center;
+          text-align: center;
+          margin-bottom: 5rem;
+        }
+        .Title2 {
+          font-size: 25px;
+          color: #445964;
+          font-weight: 400;
+          float: center;
+          text-align: center;
+          margin-bottom: 5rem;
+        }
+        .UploadFile {
+          display: flex;
+          flex-direction: row;
+          .Label1 {
+            background-color: rgba(160, 167, 171, 1);
+            color: #000;
+            border-radius: 10px;
+            width: 440px;
+            height: 40px;
+            border: none;
+            padding: 15px;
+            font-size: 13px;
+            font-weight: bold;
+            width: 30%;
+            text-align: center;
+            margin-left: 30px;
+            overflow: hidden;
+          }
+          .Button1 {
+            background-color: rgba(38, 49, 56, 1);
+            color: #fff;
+            border-radius: 10px;
+            width: 440px;
+            height: 40px;
+            margin: 0 7px;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            width: 30%;
+            text-align: center;
+          }
+          .Button2 {
+            background-color: #000;
+            color: #fff;
+            border-radius: 10px;
+            width: 120px;
+            height: 40px;
+            font-size: 15px;
+            margin: 0 7px;
+            font-weight: bold;
+            width: 30%;
+            text-align: center;
+          }
+        }
+      }
+    }
+    .ContentRight {
+      width: 30%;
+      .Logo2 {
+        width: 100%;
+        flex-direction: column;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .Logo2 {
+    display: none;
+  }
+}
