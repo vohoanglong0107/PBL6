@@ -184,17 +184,13 @@
         width: 100%;
         display: flex;
         .info {
-          width: 85%;
+          width: 100%;
           .songs {
             width: 50%;
           }
           .artists {
             width: 50%;
           }
-        }
-        .image_Lover {
-          margin-top: 120px;
-          width: 15%;
         }
       }
       .UploadFile {
@@ -233,12 +229,6 @@
             width: 50%;
           }
         }
-        .image_Lover {
-          margin-top: 50px;
-          margin-bottom: 50px;
-          text-align: center;
-          width: 100%;
-        }
       }
       .UploadFile {
         display: grid;
@@ -257,7 +247,11 @@
       }
     }
     .image_avt {
-      display: none;
+      // display: none;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      text-align: center;
+      width: 100%;
     }
   }
 }
@@ -280,12 +274,6 @@
             width: 50%;
           }
         }
-        .image_Lover {
-          margin-top: 50px;
-          margin-bottom: 50px;
-          text-align: center;
-          width: 100%;
-        }
       }
       .UploadFile {
         display: grid;
@@ -304,7 +292,11 @@
       }
     }
     .image_avt {
-      display: none;
+      // display: none;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      text-align: center;
+      width: 100%;
     }
   }
 }

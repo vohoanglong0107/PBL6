@@ -33,14 +33,6 @@ export default function ShowResult() {
                 <p className={styles.sub_artist_name4}>Ed Sheeran</p>
               </div>
             </div>
-            <div className={styles.image_Lover}>
-              <Image
-                src={Lover}
-                alt="image description"
-                height={215}
-                width={231}
-              />
-            </div>
           </div>
           <div className={styles.UploadFile}>
             {/* <input className={styles.Input} /> */}
