@@ -1,14 +1,11 @@
 .Contentleft {
-  width: 70%;
   .CoverTitle {
-    width: 100%;
-    margin-left: 50px;
     .Title {
       font-size: 30px;
       color: #445964;
       font-weight: 400;
       float: none;
-      margin-left: 100px;
+      
     }
     .Title1 {
       font-size: 50px;
@@ -27,48 +24,184 @@
       margin-bottom: 5rem;
     }
     .UploadFile {
-      display: flex;
+      
       flex-direction: row;
+      
       .Label1 {
         background-color: rgba(160, 167, 171, 1);
-        color: #000;
+        color: #445964;
         border-radius: 10px;
-        width: 440px;
+        max-width: 100%;
         height: 40px;
         border: none;
-        padding: 15px;
-        font-size: 13px;
+        padding: 8px;
+        font-size: 17px;
         font-weight: bold;
-        width: 30%;
         text-align: center;
-        margin-left: 30px;
-        overflow: hidden;
+        overflow: clip;
+        
       }
       .Button1 {
         background-color: rgba(38, 49, 56, 1);
         color: #fff;
         border-radius: 10px;
-        width: 440px;
+        max-width: 100%;
         height: 40px;
-        margin: 0 7px;
-        padding: 8px;
-        font-size: 13px;
+        padding: 4px;
+        font-size: 17px;
         font-weight: bold;
-        width: 30%;
         text-align: center;
+        
       }
       .Button2 {
         background-color: #000;
-        color: #fff;
+        color: #47DF96;
         border-radius: 10px;
-        width: 120px;
-        height: 40px;
         font-size: 15px;
-        margin: 0 7px;
         font-weight: bold;
-        width: 30%;
         text-align: center;
       }
     }
   }
+}
+
+/* PC*/
+@media (min-width: 1024px) {
+  .Contentleft {
+    width: 70%;
+    .CoverTitle {
+      width: 100%;
+      margin-left: 50px;
+      .Title {
+        font-size: 30px;
+        color: #445964;
+        font-weight: 400;
+        float: none;
+        margin-left: 100px;
+        
+      }
+      .Title1 {
+        
+      }
+      .Title2 {
+       
+      }
+      .UploadFile {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        .Label1 {
+          width: 45%;
+          margin: 0 30px;
+        }
+        .Button1 {
+          width: 45%;
+          margin: 0 30px;
+        }
+        .Button2 {
+          width: 10%;
+          margin: 0 30px;
+          width: 120px;
+          height: 40px;
+        }
+      }
+    }
+  }
+  
+ 
+}
+
+/* tablet*/
+@media (min-width: 740px) and (max-width: 1024px) {
+  .Contentleft {
+    width: 100%;
+    .CoverTitle {
+      width: 100%;
+      .Title {
+        font-size: 30px;
+        color: #445964;
+        font-weight: 400;
+        float: none;
+        margin-left:100px;
+        margin-bottom: 20px;
+        
+      }
+      .Title1 {
+        
+      }
+      .Title2 {
+       
+      }
+      .UploadFile {
+        display: grid;
+        justify-content: center;
+        
+        .Label1 {   
+          margin-bottom: 16px;
+          margin-top: 20px;
+          max-width: 100%;
+        }
+        .Button1 {
+          margin-bottom: 32px;
+          margin-top: 16px;
+          // padding-left: 89px;
+          max-width: 100%;
+        }
+        .Button2 {
+          width: 20%;
+          height: 40px;
+          margin-left: 40%;
+          
+        }
+      }
+    }
+  }
+  
+}
+/* mobile*/
+@media (max-width: 740px) {
+  .Contentleft {
+    width: 100%;
+    .CoverTitle {
+      width: 100%;
+      .Title {
+        font-size: 30px;
+        color: #445964;
+        font-weight: 400;
+        float: none;
+        text-align: center;
+        margin-bottom: 20px;
+        
+      }
+      .Title1 {
+        
+      }
+      .Title2 {
+       
+      }
+      .UploadFile {
+        display: grid;
+        justify-content: center;
+        
+        .Label1 {   
+          margin-bottom: 16px;
+          margin-top: 20px;
+          max-width: 100%;
+        }
+        .Button1 {
+          margin-bottom: 32px;
+          margin-top: 16px;
+          // padding-left: 89px;
+          max-width: 100%;
+        }
+        .Button2 {
+          width: 30%;
+          height: 40px;
+          margin-left: 35%;
+          
+        }
+      }
+    }
+  }
+
 }
