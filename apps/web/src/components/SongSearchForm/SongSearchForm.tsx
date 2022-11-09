@@ -22,7 +22,7 @@ export default function SongSearchForm() {
 
           <div className={styles.UploadFile}>
             <label className={styles.Label1} htmlFor="Label1">
-              Click the right button to upload file
+              Click the side button to upload file
             </label>
             <input type={"file"} className={styles.Button1} />
             <input type={"submit"} className={styles.Button2} />
