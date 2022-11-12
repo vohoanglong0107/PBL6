@@ -1,9 +1,7 @@
 import React from "react";
-import classNames from "classnames";
-import styles from "./Navbar.module.scss";
 import Image from "next/image";
 import Logo from "@/assets/logo.svg";
-import Head from "next/head";
+
 export default function Navbar() {
   return (
     <>
@@ -85,7 +83,7 @@ export default function Navbar() {
               style={{ marginRight: "15px", fontSize: "30px" }}
             >
               <a
-                href="/supportList/"
+                href="/supportlist"
                 className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
                 Support List
@@ -96,7 +94,7 @@ export default function Navbar() {
               style={{ marginRight: "15px", fontSize: "30px" }}
             >
               <a
-                href="/aboutUs/"
+                href="/aboutus"
                 className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
                 About Us
@@ -228,7 +226,6 @@ export default function Navbar() {
           </a>
         </div>
       </div>
-      
     </>
   );
 }

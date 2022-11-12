@@ -1,0 +1,15 @@
+.AboutUs {
+  width: 80%;
+  margin: auto;
+  flex-direction: row;
+  display: flex;
+
+  .avt {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    opacity: 0.9;
+  }
+  .avt:hover {
+    opacity: 1;
+  }
+}
