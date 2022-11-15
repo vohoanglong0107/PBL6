@@ -36,7 +36,8 @@
         "GitHub.copilot",
         "eamodio.gitlens",
         "mhutchie.git-graph",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "ms-python.python"
       ]
     }
   }
