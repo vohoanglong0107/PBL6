@@ -4,6 +4,15 @@ module.exports = {
     absoluteFileNames.map((absoluteFileName) => {
       const path = require("path");
       const fileName = path.basename(absoluteFileName);
-      return `docker run --rm -i -v ${absoluteFileName}:/opt/${fileName} hadolint/hadolint hadolint /opt/${fileName}`;
+      // https://github.com/hadolint/hadolint#configure
+      return `docker run
+        --rm
+        -i
+        -w /opt
+        -v ${absoluteFileName}:/opt/${fileName}
+        -v ${__dirname}/.hadolint.yaml:/opt/.hadolint.yaml
+        hadolint/hadolint
+        hadolint
+        /opt/${fileName}`;
     }),
 };
