@@ -37,7 +37,9 @@
         "eamodio.gitlens",
         "mhutchie.git-graph",
         "donjayamanne.githistory",
-        "ms-python.python"
+        "ms-python.python",
+        "tamasfe.even-better-toml",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
       ]
     }
   }

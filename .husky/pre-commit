@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm test
+set -euxo
+
 npx lint-staged
+npm test
+
+scripts/run_poetry.py

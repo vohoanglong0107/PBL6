@@ -26,6 +26,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+# install skaffold
+RUN curl -Lo skaffold skaffold https://storage.googleapis.com/skaffold/releases/v2.0.0/skaffold-linux-amd64 && \
+  install skaffold /usr/local/bin/ && \
+  rm skaffold
+
 # https://github.com/ContinuumIO/docker-images/blob/master/miniconda3/debian/Dockerfile
 ARG CONDA_VERSION=py38_4.12.0
 

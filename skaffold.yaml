@@ -39,3 +39,28 @@ deploy:
               - "-f"
               - "deploy/manifests/user-spaces/ml/workflows/train-mnist.yaml"
               - "--ignore-not-found"
+---
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata:
+  name: preprocess
+build:
+  artifacts:
+    - image: europe-docker.pkg.dev/pbl6-363916/mirror/preprocessing
+      context: apps/data_processing
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - deploy/manifests/user-spaces/ml/workflows/preprocess.yaml
+deploy:
+  kubectl:
+    hooks:
+      before:
+        - host:
+            command:
+              - "kubectl"
+              - "delete"
+              - "-f"
+              - "deploy/manifests/user-spaces/ml/workflows/preprocess.yaml"
+              - "--ignore-not-found"
