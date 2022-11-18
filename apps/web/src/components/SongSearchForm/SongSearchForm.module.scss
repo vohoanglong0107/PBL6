@@ -5,7 +5,6 @@
       color: #445964;
       font-weight: 400;
       float: none;
-      
     }
     .Title1 {
       font-size: 50px;
@@ -24,9 +23,8 @@
       margin-bottom: 5rem;
     }
     .UploadFile {
-      
       flex-direction: row;
-      
+
       .Label1 {
         background-color: rgba(160, 167, 171, 1);
         color: #445964;
@@ -39,7 +37,6 @@
         font-weight: bold;
         text-align: center;
         overflow: clip;
-        
       }
       .Button1 {
         background-color: rgba(38, 49, 56, 1);
@@ -51,11 +48,10 @@
         font-size: 17px;
         font-weight: bold;
         text-align: center;
-        
       }
       .Button2 {
         background-color: #000;
-        color: #47DF96;
+        color: #47df96;
         border-radius: 10px;
         font-size: 15px;
         font-weight: bold;
@@ -78,13 +74,10 @@
         font-weight: 400;
         float: none;
         margin-left: 100px;
-        
       }
       .Title1 {
-        
       }
       .Title2 {
-       
       }
       .UploadFile {
         display: flex;
@@ -107,8 +100,6 @@
       }
     }
   }
-  
- 
 }
 
 /* tablet*/
@@ -122,21 +113,18 @@
         color: #445964;
         font-weight: 400;
         float: none;
-        margin-left:100px;
+        margin-left: 100px;
         margin-bottom: 20px;
-        
       }
       .Title1 {
-        
       }
       .Title2 {
-       
       }
       .UploadFile {
         display: grid;
         justify-content: center;
-        
-        .Label1 {   
+
+        .Label1 {
           margin-bottom: 16px;
           margin-top: 20px;
           max-width: 100%;
@@ -151,12 +139,10 @@
           width: 20%;
           height: 40px;
           margin-left: 40%;
-          
         }
       }
     }
   }
-  
 }
 /* mobile*/
 @media (max-width: 740px) {
@@ -171,19 +157,16 @@
         float: none;
         text-align: center;
         margin-bottom: 20px;
-        
       }
       .Title1 {
-        
       }
       .Title2 {
-       
       }
       .UploadFile {
         display: grid;
         justify-content: center;
-        
-        .Label1 {   
+
+        .Label1 {
           margin-bottom: 16px;
           margin-top: 20px;
           max-width: 100%;
@@ -198,10 +181,8 @@
           width: 30%;
           height: 40px;
           margin-left: 35%;
-          
         }
       }
     }
   }
-
 }

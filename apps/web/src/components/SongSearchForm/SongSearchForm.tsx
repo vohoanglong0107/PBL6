@@ -1,6 +1,23 @@
-import React from "react";
+import Router, { useRouter } from "next/router";
+import React, { useState } from "react";
 import styles from "./SongSearchForm.module.scss";
 export default function SongSearchForm() {
+  const [file, setFile] = useState<File>();
+  const router = useRouter();
+
+  const handleFileChange = (e: any) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+      console.log("success");
+      console.log(e.target.files);
+    }
+  };
+
+  const handleUploadClick = (e: any) => {
+    e.preventDefault();
+    router.push("/showresult");
+    console.log("success");
+  };
   return (
     <>
       <meta
@@ -19,14 +36,21 @@ export default function SongSearchForm() {
           <p className={styles.Title2}>
             Don{"'"}t worry, Music RegZ will help you find it !
           </p>
-
-          <div className={styles.UploadFile}>
-            <label className={styles.Label1} htmlFor="Label1">
-              Click the side button to upload file
-            </label>
-            <input type={"file"} className={styles.Button1} />
-            <input type={"submit"} className={styles.Button2} />
-          </div>
+          <form onSubmit={handleUploadClick}>
+            <div className={styles.UploadFile}>
+              <label className={styles.Label1} htmlFor="Label1">
+                Click the side button to upload file
+              </label>
+              <input
+                type={"file"}
+                className={styles.Button1}
+                onChange={handleFileChange}
+                accept={".mp3, .mp4, wav"}
+                required
+              />
+              <button className={styles.Button2}>Gửi</button>
+            </div>
+          </form>
         </div>
       </div>
     </>
