@@ -1,13 +1,30 @@
-import React from "react";
+
 import className from "classnames";
 import styles from "./ShowResult.module.scss";
 import Image from "next/image";
-
+import Router, { useRouter } from "next/router";
+import React, { useState } from "react";
 import Lover from "@/assets/lover.jpg";
 import Head from "next/head";
 import Banner from "../Banner";
 
 export default function ShowResult() {
+  const [file, setFile] = useState<File>();
+  const router = useRouter();
+
+  const handleFileChange = (e: any) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+      console.log("success");
+      console.log(e.target.files);
+    }
+  };
+
+  const handleUploadClick = (e: any) => {
+    e.preventDefault();
+    router.push("/showresult");
+    console.log("success");
+  };
   return (
     <>
       <section className={styles.Section}>
@@ -34,13 +51,21 @@ export default function ShowResult() {
               </div>
             </div>
           </div>
-          <div className={styles.UploadFile}>
-            {/* <input className={styles.Input} /> */}
-            <label className={styles.Label1} htmlFor="Label1">
-              Click the side button to upload file
-            </label>
-            <input type={"file"} className={styles.Button1} />
-          </div>
+          <form onSubmit={handleUploadClick}>
+            <div className={styles.UploadFile}>
+              <label className={styles.Label1} htmlFor="Label1">
+                Click the side button to upload file
+              </label>
+              <input
+                type={"file"}
+                className={styles.Button1}
+                onChange={handleFileChange}
+                accept={".mp3, .mp4, wav"}
+                required
+              />
+              <button className={styles.Button2}>Gửi</button>
+            </div>
+          </form>
         </div>
         <div className={styles.image_avt}>
           <Banner />
