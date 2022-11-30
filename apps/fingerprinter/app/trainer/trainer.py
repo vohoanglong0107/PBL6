@@ -4,11 +4,13 @@
 # LICENSE file in the root directory of this source tree.
 """ trainer.py """
 import tensorflow as tf
-from loguru import logger
-from tensorflow.keras.optimizers import Adam
-from app.utils import logging_tqdm
+
 from app.dataset import Dataset
 from app.model import get_fingerprinter, get_melspec_layer
+from app.utils import logging_tqdm
+from loguru import logger
+from tensorflow.keras.optimizers import Adam
+
 from .agumentation_pipeline import get_specaug_chain_layer
 from .experiment_helper import ExperimentHelper
 from .mini_search_subroutines import mini_search_eval
@@ -156,10 +158,7 @@ def trainer(cfg, checkpoint_name):
             # Train
             max_train_items = cfg["TRAIN"]["MAX_NUM_ITEMS"]
             train_ds = dataset.get_train_ds(max_train_items=max_train_items)
-            with logging_tqdm(
-                total=len(train_ds),
-                mininterval=300
-            ) as tqdm:
+            with logging_tqdm(total=len(train_ds), mininterval=300) as tqdm:
                 i = 0
                 while i < len(train_ds):
                     X = train_ds[i]  # X: Tuple(Xa, Xp)
@@ -168,7 +167,7 @@ def trainer(cfg, checkpoint_name):
                     )
                     avg_loss = helper.update_tr_loss(loss)
 
-                    tqdm.set_postfix({'tr loss': float(avg_loss)})
+                    tqdm.set_postfix({"tr loss": float(avg_loss)})
                     tqdm.update(1)
                     i += 1
 
@@ -177,16 +176,13 @@ def trainer(cfg, checkpoint_name):
 
             # Validate
             val_ds = dataset.get_val_ds(max_song=250)  # max 500
-            with logging_tqdm(
-                total=len(val_ds),
-                mininterval=30
-            ) as tqdm:
+            with logging_tqdm(total=len(val_ds), mininterval=30) as tqdm:
                 i = 0
                 while i < len(val_ds):
                     X = val_ds[i]  # X: Tuple(Xa, Xp)
                     loss, sim_mtx = val_step(X, m_pre, m_fp, loss_obj)
                     avg_loss = helper.update_val_loss(loss)
-                    tqdm.set_postfix({'val loss': float(avg_loss)})
+                    tqdm.set_postfix({"val loss": float(avg_loss)})
                     tqdm.update(1)
                     i += 1
 

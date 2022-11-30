@@ -1,12 +1,17 @@
-import os
-import requests
-from flask import Flask, request
 import io
+import os
+
 import numpy as np
-from .querier import Querier
+import requests
+
 from app.utils import read_config
+from flask import Flask, request
+
+from .querier import Querier
+
 
 def create_app():
+    config = read_config()
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping()
@@ -27,6 +32,10 @@ def create_app():
         embed = querier.predict(song)
         bytestream = io.BytesIO()
         np.save(bytestream, embed)
-        requests.post(, files={"query": bytestream.getvalue()}, data={"abc": "xyz"})
+        requests.post(
+            config["QUERY"]["INDEXER_URL"],
+            files={"query": bytestream.getvalue()},
+            data={"abc": "xyz"},
+        )
 
     return app

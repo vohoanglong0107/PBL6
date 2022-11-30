@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import click
+
 from loguru import logger
+
 from .utils import read_config
 
 
@@ -20,8 +22,9 @@ def cli():
     help="preload checkpoint from this uri (to continue training)",
 )
 def train(experiment, checkpoint_uri):
-    from .trainer import trainer
     import mlflow
+
+    from .trainer import trainer
 
     cfg = read_config()
     mlflow.set_experiment(experiment)

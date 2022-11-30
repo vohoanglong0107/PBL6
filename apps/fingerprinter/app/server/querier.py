@@ -1,7 +1,8 @@
-from app.model import get_melspec_layer, get_fingerprinter
-from app.dataset import Dataset
-from app.utils import read_config
 import numpy as np
+
+from app.dataset import Dataset
+from app.model import get_fingerprinter, get_melspec_layer
+from app.utils import read_config
 
 
 class Querier:

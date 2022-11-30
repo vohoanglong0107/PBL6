@@ -27,10 +27,11 @@ References:
     • original NumPy implementation of https://arxiv.org/abs/1708.04552
         https://github.com/uoguelph-mlrg/Cutout/blob/master/util/cutout.py
 """
-import tensorflow as tf
-import numpy as np  # for test()
-import matplotlib.pyplot as plt  # for test()
 from io import BytesIO  # for test()
+
+import matplotlib.pyplot as plt  # for test()
+import numpy as np  # for test()
+import tensorflow as tf
 
 
 class SpecNCutout(tf.keras.layers.Layer):

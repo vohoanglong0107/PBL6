@@ -4,6 +4,7 @@
 # LICENSE file in the root directory of this source tree.
 """ dataset.py """
 import glob
+
 from .genUnbalSequence import genUnbalSequence
 
 
@@ -241,7 +242,8 @@ class Dataset:
             _ts_n_anchor,
             self.dur,
             self.hop,
-            self.fs, shuffle=False,
+            self.fs,
+            shuffle=False,
             random_offset_anchor=False,
             drop_the_last_non_full_batch=False,
             return_song_name=True,
@@ -256,7 +258,8 @@ class Dataset:
             _ts_n_anchor,
             self.dur,
             self.hop,
-            self.fs, shuffle=False,
+            self.fs,
+            shuffle=False,
             random_offset_anchor=False,
             drop_the_last_non_full_batch=False,
             return_song_name=False,

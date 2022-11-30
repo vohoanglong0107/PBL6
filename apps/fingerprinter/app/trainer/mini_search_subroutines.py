@@ -22,8 +22,8 @@ Functions:
         Used for calculating match score.
 
 """
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 
 
 @tf.function

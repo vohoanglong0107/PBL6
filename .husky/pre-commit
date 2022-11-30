@@ -6,4 +6,4 @@ set -euxo
 npx lint-staged
 npm test
 
-scripts/run_poetry.py
+scripts/run_python_jobs.py

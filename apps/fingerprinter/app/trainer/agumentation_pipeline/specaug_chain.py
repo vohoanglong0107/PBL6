@@ -32,10 +32,11 @@ References:
         https://github.com/uranusx86/Random-Erasing-tensorflow
 
 """
-import tensorflow as tf
-import numpy as np  # for test()
-import matplotlib.pyplot as plt  # for test()
 from io import BytesIO  # for test()
+
+import matplotlib.pyplot as plt  # for test()
+import numpy as np  # for test()
+import tensorflow as tf
 
 from .ncutout_tarray import SpecNCutout
 

@@ -4,14 +4,14 @@
 # LICENSE file in the root directory of this source tree.
 """ generate.py """
 import os
+
 import numpy as np
 import tensorflow as tf
-from loguru import logger
-from app.utils import logging_tqdm
+
 from app.dataset import Dataset
-from app.model import get_melspec_layer
-from app.model import get_fingerprinter
-from app.utils import load_checkpoint
+from app.model import get_fingerprinter, get_melspec_layer
+from app.utils import load_checkpoint, logging_tqdm
+from loguru import logger
 
 
 def build_fp(cfg):
@@ -85,9 +85,7 @@ def generate_fingerprint(
     )
 
     with logging_tqdm(
-        total=len(ds),
-        postfix=["tr loss", dict(value=0)],
-        mininterval=30
+        total=len(ds), postfix=["tr loss", dict(value=0)], mininterval=30
     ) as tqdm:
 
         i = 0

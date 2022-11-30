@@ -1,6 +1,8 @@
-from tensorflow.keras.utils import Sequence
-import numpy as np
 from pathlib import Path
+
+import numpy as np
+
+from tensorflow.keras.utils import Sequence
 
 from .audio_utils import (
     bg_mix_batch,
@@ -9,6 +11,7 @@ from .audio_utils import (
     load_audio,
     load_audio_multi_start,
 )
+
 
 MAX_IR_LENGTH = 600  # 400  # 50ms with fs=8000
 
@@ -167,8 +170,7 @@ class genUnbalSequence(Sequence):
         """Returns the number of batches per epoch."""
         if self.max_items:
             return min(
-                int(np.ceil(self.n_samples / float(self.n_anchor))),
-                self.max_items
+                int(np.ceil(self.n_samples / float(self.n_anchor))), self.max_items
             )
         return int(np.ceil(self.n_samples / float(self.n_anchor)))
 

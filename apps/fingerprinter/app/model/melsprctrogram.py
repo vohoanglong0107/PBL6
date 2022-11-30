@@ -1,8 +1,10 @@
 """melsprctrogram.py"""
-import tensorflow as tf
-from tensorflow.keras.layers import Layer, Lambda, Permute
-from kapre.time_frequency import STFT, Magnitude, ApplyFilterbank
 import math
+
+import tensorflow as tf
+
+from kapre.time_frequency import STFT, ApplyFilterbank, Magnitude
+from tensorflow.keras.layers import Lambda, Layer, Permute
 
 
 class Melspec_layer(Layer):

@@ -13,6 +13,7 @@ USAGE:
 import numpy as np
 import tensorflow as tf
 
+
 assert tf.__version__ >= "2.0"
 
 

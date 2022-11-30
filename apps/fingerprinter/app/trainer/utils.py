@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import matplotlib
+import io
 
+import matplotlib
 import matplotlib.pyplot as plt
 import tensorflow as tf
-import io
+
 
 matplotlib.use("Agg")
 
