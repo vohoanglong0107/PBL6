@@ -13,6 +13,7 @@ from tensorflow.keras.optimizers import Adam
 
 from .agumentation_pipeline import get_specaug_chain_layer
 from .experiment_helper import ExperimentHelper
+from .lamb_optimizer import LAMB
 from .mini_search_subroutines import mini_search_eval
 from .NTxentLoss import NTxentLoss
 
@@ -138,7 +139,12 @@ def trainer(cfg, checkpoint_name):
     else:
         lr_schedule = float(cfg["TRAIN"]["LR"])
 
-    opt = Adam(learning_rate=lr_schedule)
+    if cfg["TRAIN"]["OPTIMIZER"].upper() == "LAMB":
+        opt = LAMB(learning_rate=lr_schedule)
+    elif cfg["TRAIN"]["OPTIMIZER"].upper() == "ADAM":
+        opt = Adam(learning_rate=lr_schedule)
+    else:
+        raise NotImplementedError(cfg["TRAIN"]["OPTIMIZER"])
 
     # Experiment helper: see utils.experiment_helper.py for details.
     with ExperimentHelper(

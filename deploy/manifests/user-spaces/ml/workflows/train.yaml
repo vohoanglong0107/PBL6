@@ -32,8 +32,6 @@ spec:
             "train",
             "--experiment",
             "pbl6",
-            "--checkpoint-uri",
-            "mlflow-artifacts:/1/01d45deffe7d40dea463ee5e203ade7c/artifacts/checkpoint"
           ]
         env:
           - name: MLFLOW_TRACKING_URI
@@ -45,6 +43,12 @@ spec:
           - name: IR_ROOT_DIR
             value: /dataset/aug/ir/
           - name: MAX_EPOCH
-            value: "15"
+            value: "5"
           - name: GIT_PYTHON_REFRESH
             value: quiet
+          - name: TR_BATCH_SZ
+            value: "640"
+          - name: TR_N_ANCHOR
+            value: "320"
+          - name: OPTIMIZER
+            value: "LAMB"
