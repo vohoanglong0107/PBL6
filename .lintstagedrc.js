@@ -11,7 +11,7 @@ module.exports = {
         -w /opt
         -v ${absoluteFileName}:/opt/${fileName}
         -v ${__dirname}/.hadolint.yaml:/opt/.hadolint.yaml
-        hadolint/hadolint
+        ghcr.io/hadolint/hadolint
         hadolint
         /opt/${fileName}`;
     }),
