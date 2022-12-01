@@ -6,10 +6,11 @@ authors = ["Võ Hoàng Long <78085736+vohoanglong0107@users.noreply.github.com>"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8,<3.11"
 
 [tool.poetry.group.workspaces.dependencies]
 fingerprinter = { path = "./apps/fingerprinter", develop = true }
+songs_uploader = { path = "./apps/songs-uploader", develop = true }
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"

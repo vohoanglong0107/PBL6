@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "songs-uploader"
+version = "0.1.0"
+description = ""
+authors = ["vohoanglong0107 <mamlong34@gmail.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+pydub = "^0.25.1"
+google-cloud-storage = "^2.6.0"
+gunicorn = "^20.1.0"
+flask = {version = "^2.2.2", extras = ["dotenv"]}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
