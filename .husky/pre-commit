@@ -6,4 +6,3 @@ set -euxo
 npx lint-staged
 npm test
 
-scripts/run_python_jobs.py

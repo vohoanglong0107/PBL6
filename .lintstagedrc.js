@@ -1,5 +1,5 @@
 module.exports = {
-  "*.{json,md,css,scss,js,jsx,ts,tsx}": "prettier --write",
+  "*.{yaml,yml,json,md,html,css,scss,js,jsx,ts,tsx}": "prettier --write",
   Dockerfile: (absoluteFileNames) =>
     absoluteFileNames.map((absoluteFileName) => {
       const path = require("path");
@@ -15,4 +15,6 @@ module.exports = {
         hadolint
         /opt/${fileName}`;
     }),
+  "*.{tf,tfvars}": "terraform fmt",
+  "*.py": ["isort", "black"],
 };
