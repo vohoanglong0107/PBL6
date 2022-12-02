@@ -9,7 +9,6 @@ resources:
 patchesStrategicMerge:
   - patches/insecure-mode.yaml
   - patches/reduce-resource-requested.yaml
-  - patches/grpc-argocd-server.yaml
 images:
   - name: quay.io/argoproj/argocd
     newName: europe-docker.pkg.dev/pbl6-363916/mirror/argocd
