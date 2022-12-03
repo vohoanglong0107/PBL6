@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: songs-uploader
+  labels:
+    app: songs-uploader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: songs-uploader
+  template:
+    metadata:
+      labels:
+        app: songs-uploader
+    spec:
+      serviceAccountName: songs-uploader
+      containers:
+        - name: songs-uploader
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/songs-uploader
+          imagePullPolicy: Always
+          args:
+            - "--bind"
+            - "0.0.0.0:5000"
+            - "-w"
+            - "4"
+            - "--worker-class"
+            - "gevent"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: mariadb.mariadb.svc.cluster.local
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: DB_NAME
+              value: songs
+            - name: SQLALCHEMY_DATABASE_URI
+              value: mysql+pymysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+            - name: GCS_SONG_DIRECTORY
+              value: songs/
+            - name: GCS_BUCKET
+              value: pbl6-363916-europe-central2-dataset-859a
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 2
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi

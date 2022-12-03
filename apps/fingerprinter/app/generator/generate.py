@@ -13,6 +13,8 @@ from app.model import get_fingerprinter, get_melspec_layer
 from app.utils import load_checkpoint, logging_tqdm
 from loguru import logger
 
+from .db import index_song
+
 
 def build_fp(cfg):
     """Build fingerprinter"""
@@ -75,7 +77,6 @@ def generate_fingerprint(
         f"{output_root_dir}/db.mm", dtype="float32", mode="w+", shape=arr_shape
     )
     np.save(f"{output_root_dir}/db_shape.npy", arr_shape)
-    songs = []
 
     # Fingerprinting loop
     logger.info(
@@ -84,16 +85,14 @@ def generate_fingerprint(
         + " ==="
     )
 
-    with logging_tqdm(
-        total=len(ds), postfix=["tr loss", dict(value=0)], mininterval=30
-    ) as tqdm:
-
+    with logging_tqdm(total=len(ds), mininterval=30) as tqdm:
         i = 0
         while i < len(ds):
-            X, _, song = ds[i]
-            songs = songs + song
+            X, _, songs = ds[i]
+
             emb = test_step(X, m_pre, m_fp)
             arr[i * bsz : (i + 1) * bsz, :] = emb.numpy()  # Writing on disk.
+            index_song(i * bsz, songs)
             tqdm.update(1)
             i += 1
 
@@ -103,4 +102,3 @@ def generate_fingerprint(
 
     arr.flush()
     del arr  # Close memmap
-    np.savetxt(f"{output_root_dir}/songs.txt", songs, delimiter=";", fmt="%s")

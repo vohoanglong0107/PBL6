@@ -8,9 +8,9 @@ def read_config():
 
     cfg = {
         "DIR": {
-            "SOURCE_ROOT_DIR": os.environ.get("SOURCE_ROOT_DIR"),
-            "BG_ROOT_DIR": os.environ.get("BG_ROOT_DIR"),
-            "IR_ROOT_DIR": os.environ.get("IR_ROOT_DIR"),
+            "SOURCE_ROOT_DIR": os.environ.get("SOURCE_ROOT_DIR", "./music/"),
+            "BG_ROOT_DIR": os.environ.get("BG_ROOT_DIR", "./aug/bg/"),
+            "IR_ROOT_DIR": os.environ.get("IR_ROOT_DIR", "./aug/ir/"),
             "LOG_ROOT_DIR": os.environ.get("LOG_ROOT_DIR", "logs/"),
         },
         "BSZ": {
@@ -85,7 +85,10 @@ def read_config():
             if os.environ.get("MAX_NUM_ITEMS", None) is not None
             else None,
         },
-        "QUERY": {"INDEXER_URL": os.environ.get("INDEXER_URL", None)},
+        "QUERY": {
+            "INDEXER_URL": os.environ.get("INDEXER_URL"),
+            "INDEX_DB_URI": os.environ.get("INDEX_DB_URI"),
+        },
     }
     logger.info(f"Loading configuration{cfg}")
     return cfg

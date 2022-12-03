@@ -31,11 +31,17 @@ def create_app():
         song = request.files["query"]
         embed = querier.predict(song)
         bytestream = io.BytesIO()
+        bytestream.name = song.filename
         np.save(bytestream, embed)
-        requests.post(
-            config["QUERY"]["INDEXER_URL"],
-            files={"query": bytestream.getvalue()},
-            data={"abc": "xyz"},
-        )
+        try:
+            r = requests.post(
+                config["QUERY"]["INDEXER_URL"],
+                files={"query": bytestream.getvalue()},
+                data={"abc": "xyz"},
+            )
+            r.raise_for_status()
+            return r.data
+        except Exception as e:
+            logger.info(e)
 
     return app

@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: songs-uploader
+  namespace: argocd
+spec:
+  destination:
+    namespace: songs-uploader
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deploy/manifests/apps/songs-uploader
+    repoURL: https://github.com/vohoanglong0107/PBL6
+    targetRevision: main

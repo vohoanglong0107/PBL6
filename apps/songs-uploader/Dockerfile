@@ -25,16 +25,20 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONHASHSEED=random
 ENV PYTHONDONTWRITEBYTECODE 1
 
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends ffmpeg=7:4.3.5-0+deb11u1 && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 COPY --from=builder /app/dist/*.whl .
 RUN pip install --no-cache-dir ./*.whl && rm -rf ./*.whl
 
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends libsndfile1=1.0.31-2 && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-
 COPY . .
 
-ENTRYPOINT [ "python3", "-m" ]
-CMD ["app.main", "train"]
+RUN chmod +x ./docker-entrypoint.sh
+
+EXPOSE 5000
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["-w", "4"]

@@ -10,8 +10,12 @@ packages = [{include = "app"}]
 python = ">=3.8,<3.11"
 pydub = "^0.25.1"
 google-cloud-storage = "^2.6.0"
-gunicorn = "^20.1.0"
 flask = {version = "^2.2.2", extras = ["dotenv"]}
+loguru = "0.6.0"
+flask-sqlalchemy = "^3.0.2"
+flask-migrate = "^4.0.0"
+pymysql = "^1.0.2"
+gunicorn = {version = "^20.1.0", extras = ["gevent"]}
 
 
 [build-system]

@@ -39,9 +39,14 @@ output "dataset_google_service_account" {
   description = "Dataset service account email"
 }
 
-resource "google_service_account_iam_member" "dataset" {
+resource "google_service_account_iam_member" "argo_executor" {
   service_account_id = google_service_account.dataset.name
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${var.project_id}.svc.id.goog[ml/executor]"
 }
 
+resource "google_service_account_iam_member" "songs_uploader" {
+  service_account_id = google_service_account.dataset.name
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "serviceAccount:${var.project_id}.svc.id.goog[songs-uploader/songs-uploader]"
+}

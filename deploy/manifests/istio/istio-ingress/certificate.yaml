@@ -9,6 +9,7 @@ spec:
     - argocd.pbl6.mamlong34.monster
     - mlflow.pbl6.mamlong34.monster
     - argo.pbl6.mamlong34.monster
+    - songs-uploader.pbl6.mamlong34.monster
   issuerRef:
     name: letsencrypt-prod
     kind: Issuer

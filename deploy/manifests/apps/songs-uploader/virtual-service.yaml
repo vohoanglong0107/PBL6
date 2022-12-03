@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: songs-uploader
+spec:
+  gateways:
+    - istio-ingress/cluster-gateway
+  hosts:
+    - "songs-uploader.pbl6.mamlong34.monster"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: songs-uploader
+            port:
+              number: 80

@@ -25,14 +25,15 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONHASHSEED=random
 ENV PYTHONDONTWRITEBYTECODE 1
 
-WORKDIR /app
-COPY --from=builder /app/dist/*.whl .
-RUN pip install --no-cache-dir *.whl && rm -rf *.whl
-
 RUN apt-get update && \
   apt-get install -y --no-install-recommends libsndfile1=1.0.31-2 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=builder /app/dist/*.whl .
+RUN pip install --no-cache-dir *.whl && rm -rf *.whl
+
 
 COPY . .
 
