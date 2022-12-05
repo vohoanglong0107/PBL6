@@ -2,7 +2,7 @@ import contextlib
 
 from app.utils import read_config
 from loguru import logger
-from sqlalchemy import Column, Integer, create_engine
+from sqlalchemy import Column, Integer, create_engine, select
 from sqlalchemy.dialects.mysql import TEXT, insert
 from sqlalchemy.engine import URL, make_url
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -75,3 +75,13 @@ def index_song(start_index, song_names):
             on_duplicate_key_stmt = insert_stmt.on_duplicate_key_update(name=song_name)
             conn.execute(on_duplicate_key_stmt)
         conn.commit()
+
+
+def get_candidate_names(candidate_indices):
+    with engine.connect() as conn:
+        stmt = select(Song.name).where(Song.id.in_(candidate_indices)).distinct()
+        candidates = conn.execute(stmt)
+        candidate_names = []
+        for candidate in candidates:
+            candidate_names.append(candidate.name)
+        return candidate_names

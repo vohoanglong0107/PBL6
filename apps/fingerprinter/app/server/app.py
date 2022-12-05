@@ -7,6 +7,7 @@ import uuid
 import numpy as np
 import requests
 
+from app.generator.db import get_candidate_names
 from app.utils import read_config
 from flask import Flask, make_response, request
 from loguru import logger
@@ -46,13 +47,10 @@ def create_app():
                 files={"query": bytestream.getvalue()},
             )
             r.raise_for_status()
-            candidates = r.json()["candidates"]
-            logger.info(f"received candidates {candidates}")
+            candidate_indices = r.json()["candidates"]
+            logger.info(f"received candidates {candidate_indices}")
 
-            # r = requests.get(config["SONGS_UPLOADER"]["URL"], params=candidates)
-            # r.raise_for_status()
-            # response = make_response(r.json()["data"])
-            response = candidates
+            response = get_candidate_names(candidate_indices)
             return response
         except Exception as e:
             traceback.print_exc()
