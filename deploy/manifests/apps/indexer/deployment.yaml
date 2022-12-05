@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: indexer
+  labels:
+    app: indexer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: indexer
+  template:
+    metadata:
+      labels:
+        app: indexer
+      annotations:
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    spec:
+      containers:
+        - name: indexer
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/indexer
+          imagePullPolicy: Always
+          command:
+            - "/opt/conda/bin/conda"
+            - "run"
+            - "--no-capture-output"
+            - "gunicorn"
+            - "app.wsgi:app"
+          args:
+            - "--bind"
+            - "0.0.0.0:5000"
+            - "-w"
+            - "1"
+          env:
+            - name: ARTIFACT_ENPOINT_URL
+              value: http://minio.minio.svc.cluster.local:9000
+            - name: ARTIFACT_BUCKET
+              value: datasets
+            - name: INDEX_ARTIFACT_KEY
+              value: faiss.index
+            - name: INDEX_PATH
+              value: /faiss.index
+            - name: EMB_ARTIFACT_KEY
+              value: embeds
+            - name: EMB_DIR
+              value: /embeds
+            - name: AWS_ACCESS_KEY_ID
+              value: minio
+            - name: AWS_SECRET_ACCESS_KEY
+              value: minio123
+          ports:
+            - containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            failureThreshold: 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 120
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi

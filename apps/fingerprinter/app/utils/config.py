@@ -88,7 +88,9 @@ def read_config():
         "QUERY": {
             "INDEXER_URL": os.environ.get("INDEXER_URL"),
             "INDEX_DB_URI": os.environ.get("INDEX_DB_URI"),
+            "CHECKPOINT_URI": os.environ.get("CHECKPOINT_URI"),
         },
+        "SONGS_UPLOADER": {"URL": os.environ.get("SONGS_UPLOADER_URL")},
     }
     logger.info(f"Loading configuration{cfg}")
     return cfg

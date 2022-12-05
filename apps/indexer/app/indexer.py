@@ -2,7 +2,9 @@
 #
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
+import os
 import time
+
 import faiss
 import numpy as np
 
@@ -30,8 +32,8 @@ def load_memmap_data(
     -------
     (data, data_shape)
     """
-    path_shape = source_dir + fname + "_shape.npy"
-    path_data = source_dir + fname + ".mm"
+    path_shape = os.path.join(source_dir, fname + "_shape.npy")
+    path_data = os.path.join(source_dir, fname + ".mm")
     data_shape = np.load(path_shape)
     if shape_only:
         return data_shape
@@ -50,7 +52,7 @@ def load_memmap_data(
     return data, data_shape
 
 
-def get_index(train_data, train_data_shape, use_gpu=True, max_nitem_train=2e7):
+def get_index(train_data_shape):
     """
     • Create FAISS index
     • Train index using (partial) data
@@ -87,14 +89,17 @@ def get_index(train_data, train_data_shape, use_gpu=True, max_nitem_train=2e7):
     # Build a flat (CPU) index
     index = faiss.IndexFlatL2(d)  #
 
-    print(f"Creating index: \033[93mivfpq\033[0m")
+    print("Creating index: \033[93mivfpq\033[0m")
 
     # Using IVF-PQ index
     code_sz = 64  # power of 2
     n_centroids = 3  #
     nbits = 8  # nbits must be 8, 12 or 16, The dimension d should be a multiple of M.
     index = faiss.IndexIVFPQ(index, d, n_centroids, code_sz, nbits)
+    return index
 
+
+def train_index(index, train_data, max_nitem_train=2e7):
     # Train index
     start_time = time.time()
     if len(train_data) > max_nitem_train:
@@ -117,44 +122,35 @@ def get_index(train_data, train_data_shape, use_gpu=True, max_nitem_train=2e7):
     return index
 
 
-emb_dir = "generated/"
-# Load items from {query, db, dummy_db}
-db, db_shape = load_memmap_data(emb_dir, "db5")
-# Create and train FAISS index
+def load_index(index_path: str):
+    return faiss.read_index(index_path)
 
-index = get_index(db, db.shape)
-index.add(db)
-query = np.load("query.npy")
-l = query.shape[0]
-n, I = index.search(query, 20)
-print(l)
-print(I)
-for offset in range(len(I)):
-    I[offset, :] -= offset
-print(n)
-print(I)
-candidates = np.unique(I[np.where(I >= 0)])
-print(candidates)
-_scores = np.zeros(len(candidates))
-for ci, cid in enumerate(candidates):
-    if cid + l > index.ntotal:
-        continue
-    _scores[ci] = np.mean(
-        np.diag(
-            # np.dot(query, index.reconstruct_n(int(cid), int(l)).T)
-            np.dot(query, db[cid : cid + l, :].T)
+
+def save_index(index, index_path: str):
+    faiss.write_index(index, index_path)
+
+
+def search(
+    index,
+    query: np.ndarray,
+    db: np.ndarray,
+    num_candidate_return: int = 10,
+    num_candidate_search: int = 20,
+):
+    length = query.shape[0]
+    n, I = index.search(query, num_candidate_search)
+    for offset in range(len(I)):
+        I[offset, :] -= offset
+    candidates = np.unique(I[np.where(I >= 0)])
+    _scores = np.zeros(len(candidates))
+    for ci, cid in enumerate(candidates):
+        if cid + length > index.ntotal:
+            continue
+        _scores[ci] = np.mean(
+            np.diag(
+                # np.dot(query, index.reconstruct_n(int(cid), int(length)).T)
+                np.dot(query, db[cid : cid + length, :].T)
+            )
         )
-    )
 
-print(_scores)
-pred_ids = candidates[np.argsort(-_scores)[:10]]
-print(pred_ids)
-songs = set()
-current_id = 0
-with open("generated/songs5.txt") as f:
-    for i, line in enumerate(f):
-        if i == pred_ids[current_id]:
-            songs.add(line)
-            print(pred_ids[current_id], i, line)
-            current_id += 1
-print(songs)
+    return candidates[np.argsort(-_scores)[:num_candidate_return]]

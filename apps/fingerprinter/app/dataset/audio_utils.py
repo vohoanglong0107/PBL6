@@ -131,33 +131,29 @@ def get_fns_seg_list(fns_list=[], segment_mode="all", fs=22050, duration=1, hop=
         # Get audio info
         n_frames_in_seg = fs * duration
         n_frames_in_hop = fs * hop  # 2019 09.05
-        file_ext = filename[-3:]
 
-        if file_ext == "wav":
-            with wave.open(filename, "r") as pt_wav:
-                _fs = pt_wav.getframerate()
+        with wave.open(filename, "r") as pt_wav:
+            _fs = pt_wav.getframerate()
 
-                if fs != _fs:
-                    raise ValueError(
-                        "Sample rate should be {} but got {}".format(str(fs), str(_fs))
-                    )
-
-                n_frames = pt_wav.getnframes()
-                # n_segs = n_frames // n_frames_in_seg
-                if n_frames > n_frames_in_seg:
-                    n_segs = (
-                        n_frames - n_frames_in_seg + n_frames_in_hop
-                    ) // n_frames_in_hop
-                else:
-                    n_segs = 1
-
-                n_segs = int(n_segs)
-                assert n_segs > 0
-                residual_frames = np.max(
-                    [0, n_frames - ((n_segs - 1) * n_frames_in_hop + n_frames_in_seg)]
+            if fs != _fs:
+                raise ValueError(
+                    "Sample rate should be {} but got {}".format(str(fs), str(_fs))
                 )
-        else:
-            raise NotImplementedError(file_ext)
+
+            n_frames = pt_wav.getnframes()
+            # n_segs = n_frames // n_frames_in_seg
+            if n_frames > n_frames_in_seg:
+                n_segs = (
+                    n_frames - n_frames_in_seg + n_frames_in_hop
+                ) // n_frames_in_hop
+            else:
+                n_segs = 1
+
+            n_segs = int(n_segs)
+            assert n_segs > 0
+            residual_frames = np.max(
+                [0, n_frames - ((n_segs - 1) * n_frames_in_hop + n_frames_in_seg)]
+            )
 
         # 'all', 'random_oneshot', 'first'
         if segment_mode == "all":
@@ -206,17 +202,13 @@ def load_audio(
     end_frame_idx = start_frame_idx + seg_length_frame
 
     # Get file-info
-    file_ext = filename[-3:]
     # print(start_frame_idx, end_frame_idx)
 
-    if file_ext == "wav":
-        with wave.open(filename, "r") as pt_wav:
-            pt_wav.setpos(start_frame_idx)
-            x = pt_wav.readframes(end_frame_idx - start_frame_idx)
-            x = np.frombuffer(x, dtype=np.int16)
-            x = x / 2**15  # dtype=float
-    else:
-        raise NotImplementedError(file_ext)
+    with wave.open(filename, "r") as pt_wav:
+        pt_wav.setpos(start_frame_idx)
+        x = pt_wav.readframes(end_frame_idx - start_frame_idx)
+        x = np.frombuffer(x, dtype=np.int16)
+        x = x / 2**15  # dtype=float
 
     # Max Normalize, random amplitude
     if amp_mode == "normal":

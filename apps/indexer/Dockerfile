@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.8
 
 
 ARG CONDA_VERSION=py38_4.12.0
@@ -29,5 +29,11 @@ RUN set -x && \
   find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
   /opt/conda/bin/conda clean -afy
 
-RUN /opt/conda/bin/conda install -y -c pytorch faiss-cpu
-RUN /opt/conda/bin/conda install -y flask
+RUN /opt/conda/bin/conda install -c pytorch -y faiss-cpu=1.7.3 &&\
+  /opt/conda/bin/conda install -c conda-forge -y boto3=1.26.22 flask=2.1.3 gunicorn=20.1.0
+WORKDIR /app
+
+COPY . .
+
+ENTRYPOINT ["/opt/conda/bin/conda", "run", "gunicorn", "app.wsgi:app"]
+CMD ["-w", "4"]

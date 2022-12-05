@@ -1,5 +1,7 @@
 import tensorflow as tf
 
+from loguru import logger
+
 from .config import read_config
 
 
@@ -22,13 +24,13 @@ def load_checkpoint(m_fp, checkpoint_uri=None):
     c_manager = tf.train.CheckpointManager(checkpoint, checkpoint_dir, max_to_keep=None)
 
     # Load
-    tf.print("\x1b[1;32mSearching for the latest checkpoint...\x1b[0m")
+    logger.info("\x1b[1;32mSearching for the latest checkpoint...\x1b[0m")
     latest_checkpoint = c_manager.latest_checkpoint
     if latest_checkpoint:
         checkpoint_index = int(latest_checkpoint.split(sep="ckpt-")[-1])
         status = checkpoint.restore(latest_checkpoint)
         status.expect_partial()
-        tf.print(f"---Restored from {c_manager.latest_checkpoint}---")
+        logger.info(f"---Restored from {c_manager.latest_checkpoint}---")
     else:
         raise FileNotFoundError("Cannot find checkpoint")
 

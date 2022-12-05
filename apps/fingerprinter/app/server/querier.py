@@ -2,7 +2,8 @@ import numpy as np
 
 from app.dataset import Dataset
 from app.model import get_fingerprinter, get_melspec_layer
-from app.utils import read_config
+from app.utils import load_checkpoint, read_config
+from loguru import logger
 
 
 class Querier:
@@ -12,6 +13,7 @@ class Querier:
         self.dataset = Dataset(self.cfg)
         self.m_fp = get_fingerprinter(self.cfg, trainable=False)
         self.m_pre = get_melspec_layer(self.cfg, trainable=False)
+        load_checkpoint(self.m_fp, self.cfg["QUERY"]["CHECKPOINT_URI"])
 
     def predict(self, song):
         query_sequence = self.dataset.get_query(song)
