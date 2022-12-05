@@ -16,6 +16,13 @@ class Config:
 
     SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "pool_size": int(environ.get("SQLALCHEMY_POOL_SIZE", "10")),
+        "pool_recycle": int(environ.get("SQLALCHEMY_POOL_RECYCLE", "3600")),
+        "pool_pre_ping": environ.get("SQLALCHEMY_POOL_RECYCLE")
+        if environ.get("SQLALCHEMY_POOL_RECYCLE")
+        else True,
+    }
 
     GCS_BUCKET = environ.get("GCS_BUCKET")
     GCS_SONG_DIRECTORY = environ.get("GCS_SONG_DIRECTORY")

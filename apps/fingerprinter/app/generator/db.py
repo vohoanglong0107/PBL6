@@ -9,7 +9,13 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 
 config = read_config()
-engine = create_engine(config["QUERY"]["INDEX_DB_URI"], future=True)
+engine = create_engine(
+    config["QUERY"]["INDEX_DB_URI"],
+    future=True,
+    pool_recycle=3600,
+    pool_size=10,
+    pool_pre_ping=True,
+)
 
 
 def create_database_if_not_exist():
