@@ -52,6 +52,7 @@ def songs_api():
 @app.route("/api/predictions", methods=["GET"])
 def predictions():
     query = request.files["query"]
+    query = convert_to_wav_8000hz_format(query)
     r = requests.get(
         app.config["FINGERPRINTER_URL"],
         files={"query": query},
