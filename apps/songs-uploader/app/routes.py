@@ -1,4 +1,7 @@
+import requests
+
 from flask import flash, jsonify, redirect, render_template, request
+from loguru import logger
 
 from .app import app
 from .db import db
@@ -44,3 +47,27 @@ def songs():
 def songs_api():
     songs = db.session.execute(db.select(Song)).scalars().all()
     return jsonify([song.as_dict() for song in songs])
+
+
+@app.route("/api/predictions", methods=["GET"])
+def predictions():
+    query = request.files["query"]
+    r = requests.get(
+        app.config["FINGERPRINTER_URL"],
+        files={"query": query},
+    )
+    r.raise_for_status()
+
+    logger.info(r.json())
+    candidates_index = r.json()
+    candidates_info = (
+        db.session.execute(db.select(Song).where(Song.id.in_(candidates_index)))
+        .scalars()
+        .all()
+    )
+    return jsonify([candidate_info.as_dict() for candidate_info in candidates_info])
+
+
+@app.route("/healthz", methods=["GET"])
+def healthz():
+    return "oke"

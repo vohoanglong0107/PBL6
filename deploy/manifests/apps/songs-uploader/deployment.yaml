@@ -51,13 +51,27 @@ spec:
               value: songs/
             - name: GCS_BUCKET
               value: pbl6-363916-europe-central2-dataset-859a
+            - name: FINGERPRINTER_URL
+              value: http://fingerprinter.fingerprinter.svc.cluster.local/predictions
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthz
+              port: 5000
+            failureThreshold: 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            failureThreshold: 30
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
               port: 5000
             initialDelaySeconds: 30
             periodSeconds: 5
-            timeoutSeconds: 2
           resources:
             requests:
               cpu: 100m

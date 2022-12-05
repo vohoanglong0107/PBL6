@@ -27,6 +27,8 @@ class Config:
     GCS_BUCKET = environ.get("GCS_BUCKET")
     GCS_SONG_DIRECTORY = environ.get("GCS_SONG_DIRECTORY")
 
+    FINGERPRINTER_URL = environ.get("FINGERPRINTER_URL")
+
 
 class ProductionConfig(Config):
     pass
