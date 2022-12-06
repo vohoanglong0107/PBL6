@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - minio-artifact-secret.yaml
+  - mysql-secret.yaml
   - service-account.yaml
   - role.yaml
   - role-binding.yaml

@@ -36,7 +36,10 @@
         "GitHub.copilot",
         "eamodio.gitlens",
         "mhutchie.git-graph",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "ms-python.python",
+        "tamasfe.even-better-toml",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
       ]
     }
   }

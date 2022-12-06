@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: songs-uploader
+  labels:
+    app: songs-uploader
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: songs-uploader

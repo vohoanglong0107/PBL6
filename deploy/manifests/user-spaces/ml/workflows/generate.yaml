@@ -1,0 +1,135 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: generate
+  namespace: ml
+spec:
+  entrypoint: generate
+  serviceAccountName: executor
+  templates:
+    - name: generate
+      steps:
+        - - name: download-songs
+            template: download-songs
+        - - name: generate-index
+            template: generate-index
+    # workaround as argo can't handle download artifacts under same prefix that good
+    - name: download-songs
+      metadata:
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+      container:
+        image: europe-docker.pkg.dev/pbl6-363916/mirror/songs-uploader
+        imagePullPolicy: Always
+        command: ["python3", "-m"]
+        args:
+          - "app.cli"
+          - "/songs"
+        env:
+          - name: DB_HOST
+            value: mariadb.mariadb.svc.cluster.local
+          - name: DB_PORT
+            value: "3306"
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
+          - name: DB_NAME
+            value: songs
+          - name: SQLALCHEMY_DATABASE_URI
+            value: mysql+pymysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+      outputs:
+        artifacts:
+          - name: songs
+            path: /songs
+            s3:
+              endpoint: minio.minio.svc.cluster.local:9000
+              insecure: true
+              bucket: datasets
+              key: raw-songs
+              accessKeySecret:
+                name: minio-artifact
+                key: accesskey
+              secretKeySecret:
+                name: minio-artifact
+                key: secretkey
+            archive:
+              tar:
+                compressionLevel: 9
+    - name: generate-index
+      metadata:
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+      inputs:
+        artifacts:
+          - name: songs
+            path: /songs
+            s3:
+              endpoint: minio.minio.svc.cluster.local:9000
+              insecure: true
+              bucket: datasets
+              key: raw-songs
+              accessKeySecret:
+                name: minio-artifact
+                key: accesskey
+              secretKeySecret:
+                name: minio-artifact
+                key: secretkey
+      container:
+        image: europe-docker.pkg.dev/pbl6-363916/mirror/neural-fp
+        imagePullPolicy: Always
+        command: ["python3", "-m"]
+        args:
+          - "app.main"
+          - "generate"
+          - "--source"
+          - "/songs"
+          - "--output"
+          - "/embeds"
+          - "--checkpoint-uri"
+          - "mlflow-artifacts:/1/881d9e9317f443018f0298672a815ca4/artifacts/checkpoint"
+        env:
+          - name: MLFLOW_TRACKING_URI
+            value: http://mlflow.mlflow.svc.cluster.local
+          - name: DB_HOST
+            value: mariadb.mariadb.svc.cluster.local
+          - name: DB_PORT
+            value: "3306"
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: password
+          - name: DB_NAME
+            value: "song_indexes"
+          - name: INDEX_DB_URI
+            value: mysql+pymysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+      outputs:
+        artifacts:
+          - name: embeds
+            path: /embeds
+            s3:
+              endpoint: minio.minio.svc.cluster.local:9000
+              insecure: true
+              bucket: datasets
+              key: embeds
+              accessKeySecret:
+                name: minio-artifact
+                key: accesskey
+              secretKeySecret:
+                name: minio-artifact
+                key: secretkey
+            archive:
+              tar:
+                compressionLevel: 9

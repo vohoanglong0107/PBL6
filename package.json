@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/web",
+    "apps/docs",
+    "packages/eslint-config-custom",
+    "packages/jest-presets",
+    "packages/tsconfig",
+    "packages/ui"
   ],
   "scripts": {
     "build": "turbo run build",

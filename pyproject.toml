@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "pbl6"
+version = "0.1.0"
+description = ""
+authors = ["Võ Hoàng Long <78085736+vohoanglong0107@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+
+[tool.poetry.group.workspaces.dependencies]
+fingerprinter = { path = "./apps/fingerprinter", develop = true }
+songs_uploader = { path = "./apps/songs-uploader", develop = true }
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+tomli = "^2.0.1"
+flake8 = "^5.0.4"
+isort = "^5.10.1"
+
+[tool.isort]
+py_version = 38
+profile = "black"
+combine_as_imports = true
+multi_line_output = 3
+lines_between_types = 1
+lines_after_imports = 2
+extend_skip = ["setup.py"]
+known_third_party = ["poetry.core"]
+
+[tool.black]
+target-version = ['py38']
+preview = true
+force-exclude = '''
+.*/setup\.py$
+'''
+
+[tool.pyright]
+include = ["app"]
+pythonVersion = "3.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+

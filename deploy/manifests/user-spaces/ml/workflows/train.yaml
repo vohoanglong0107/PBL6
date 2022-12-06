@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: train
+  namespace: ml
+spec:
+  entrypoint: train
+  serviceAccountName: executor
+  templates:
+    - name: train
+      metadata:
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+      inputs:
+        artifacts:
+          - name: dataset
+            path: /dataset
+            gcs:
+              bucket: pbl6-363916-europe-central2-dataset-859a
+              key: neural-audio-fingerprint.zip
+            # will unzip content to that path, so if inside the zip artifact is
+            # a file call a.txt, it will be renamed to /dataset
+            archive:
+              zip: {}
+      container:
+        image: europe-docker.pkg.dev/pbl6-363916/mirror/neural-fp
+        imagePullPolicy: Always
+        command: ["python3", "-m"]
+        args:
+          [
+            "app.main",
+            "train",
+            "--experiment",
+            "pbl6",
+          ]
+        env:
+          - name: MLFLOW_TRACKING_URI
+            value: http://mlflow.mlflow.svc.cluster.local
+          - name: SOURCE_ROOT_DIR
+            value: /dataset/music/
+          - name: BG_ROOT_DIR
+            value: /dataset/aug/bg/
+          - name: IR_ROOT_DIR
+            value: /dataset/aug/ir/
+          - name: MAX_EPOCH
+            value: "5"
+          - name: GIT_PYTHON_REFRESH
+            value: quiet
+          - name: TR_BATCH_SZ
+            value: "640"
+          - name: TR_N_ANCHOR
+            value: "320"
+          - name: OPTIMIZER
+            value: "LAMB"

@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: mlflow
-          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow:0.0.5
-          imagePullPolicy: IfNotPresent
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/mlflow
+          imagePullPolicy: Always
           command:
             - "python"
           args:
@@ -29,6 +29,7 @@ spec:
             - "1"
             - "--static-prefix"
             - "/"
+            - "--gunicorn-opts='--timeout=120'"
           ports:
             - containerPort: 5000
           env:

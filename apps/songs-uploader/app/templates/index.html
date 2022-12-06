@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0"
+    />
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #eeeeee;
+      }
+
+      .file-upload {
+        background-color: #ffffff;
+        width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .file-upload-btn {
+        width: 100%;
+        margin: 0;
+        color: #fff;
+        background: #1fb264;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #15824b;
+        transition: all 0.2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .file-upload-btn:hover {
+        background: #1aa059;
+        color: #ffffff;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .file-upload-btn:active {
+        border: 0;
+        transition: all 0.2s ease;
+      }
+
+      .file-upload-content {
+        display: none;
+        text-align: center;
+      }
+
+      .file-upload-input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .image-upload-wrap {
+        margin-top: 20px;
+        border: 4px dashed #1fb264;
+        position: relative;
+      }
+
+      .image-dropping,
+      .image-upload-wrap:hover {
+        background-color: #1fb264;
+        border: 4px dashed #ffffff;
+      }
+
+      .image-title-wrap {
+        padding: 0 15px 15px 15px;
+        color: #222;
+      }
+
+      .drag-text {
+        text-align: center;
+      }
+
+      .drag-text h3 {
+        font-weight: 100;
+        text-transform: uppercase;
+        color: #15824b;
+        padding: 60px 0;
+      }
+
+      .file-upload-image {
+        max-height: 200px;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 20px;
+      }
+
+      .remove-image {
+        width: 200px;
+        margin: 0;
+        color: #fff;
+        background: #cd4535;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #b02818;
+        transition: all 0.2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .remove-image:hover {
+        background: #c13b2a;
+        color: #ffffff;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .remove-image:active {
+        border: 0;
+        transition: all 0.2s ease;
+      }
+
+      .alert {
+        padding: 20px;
+        margin: 5px;
+        color: #970020;
+        background-color: #ffd5de;
+      }
+      /* Video Explanation - https://youtu.be/3AK3vspZvvM */
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        font-size: 16px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      .custom-field {
+        position: relative;
+        font-size: 14px;
+        border-top: 20px solid transparent;
+        margin-bottom: 5px;
+        display: inline-block;
+        --field-padding: 12px;
+      }
+
+      .custom-field input {
+        border: none;
+        -webkit-appearance: none;
+        -ms-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: #f2f2f2;
+        padding: var(--field-padding);
+        border-radius: 3px;
+        width: 250px;
+        outline: none;
+        font-size: 14px;
+      }
+
+      .custom-field .placeholder {
+        position: absolute;
+        left: var(--field-padding);
+        width: calc(100% - (var(--field-padding) * 2));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        top: 22px;
+        line-height: 100%;
+        transform: translateY(-50%);
+        color: #aaa;
+        transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+      }
+
+      .custom-field input.dirty + .placeholder,
+      .custom-field input:focus + .placeholder,
+      .custom-field input:not(:placeholder-shown) + .placeholder {
+        top: -10px;
+        font-size: 10px;
+        color: #222;
+      }
+
+      .custom-field .error-message {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        font-size: 12px;
+        background: #d30909;
+        color: #fff;
+        height: 24px;
+      }
+
+      .custom-field .error-message:empty {
+        opacity: 0;
+      }
+
+      /* ONE */
+      .custom-field.one input {
+        background: none;
+        border: 2px solid #ddd;
+        transition: border-color 0.3s ease;
+      }
+
+      .custom-field.one input + .placeholder {
+        left: 8px;
+        padding: 0 5px;
+      }
+
+      .custom-field.one input.dirty,
+      .custom-field.one input:not(:placeholder-shown),
+      .custom-field.one input:focus {
+        border-color: #222;
+        transition-delay: 0.1s;
+      }
+
+      .custom-field.one input.dirty + .placeholder,
+      .custom-field.one input:not(:placeholder-shown) + .placeholder,
+      .custom-field.one input:focus + .placeholder {
+        top: 0;
+        font-size: 10px;
+        color: #222;
+        background: #fff;
+        width: auto;
+      }
+
+      /* TWO */
+      .custom-field.two input {
+        border-radius: 0;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        background: linear-gradient(90deg, #222, #222) center bottom/0 0.15em
+            no-repeat,
+          linear-gradient(90deg, #ccc, #ccc) left bottom/100% 0.15em no-repeat,
+          linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% no-repeat;
+        transition: background-size 0.3s ease;
+      }
+
+      .custom-field.two input.dirty,
+      .custom-field.two input:not(:placeholder-shown),
+      .custom-field.two input:focus {
+        background-size: 100% 0.15em, 100% 0.1em, 100%;
+      }
+
+      /* THREE */
+      .custom-field.three {
+        --draw-duration: 0.1s;
+        --draw-color: #222;
+        --draw-line-width: 2px;
+        --draw-easing: linear;
+      }
+
+      .custom-field.three .border {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: none;
+        display: flex;
+        align-items: center;
+        padding-left: 12px;
+        borde-radius: 3px;
+      }
+
+      .custom-field.three .border::after,
+      .custom-field.three .border::before {
+        content: "";
+        width: 0;
+        height: 0;
+        display: inline-block;
+        position: absolute;
+        border-radius: 3px;
+      }
+
+      .custom-field.three .border::before {
+        left: 0;
+        bottom: 0;
+        border-right: 0px solid var(--draw-color);
+        border-bottom: 0px solid var(--draw-color);
+        transition: border 0s linear calc(var(--draw-duration) * 4),
+          height var(--draw-duration) var(--draw-easing)
+            calc(var(--draw-duration) * 2),
+          width var(--draw-duration) var(--draw-easing)
+            calc(var(--draw-duration) * 3);
+      }
+
+      .custom-field.three .border::after {
+        right: 0;
+        top: 0;
+        border-left: 0px solid var(--draw-color);
+        border-top: 0px solid var(--draw-color);
+        transition: border 0s linear calc(var(--draw-duration) * 2),
+          height var(--draw-duration) var(--draw-easing),
+          width var(--draw-duration) var(--draw-easing) var(--draw-duration);
+      }
+
+      .custom-field.three input:focus ~ .border::before,
+      .custom-field.three input:not(:placeholder-shown) ~ .border::before,
+      .custom-field.three input.dirty ~ .border::before,
+      .custom-field.three input:focus ~ .border::after,
+      .custom-field.three input:not(:placeholder-shown) ~ .border::after,
+      .custom-field.three input.dirty ~ .border::after {
+        width: 100%;
+        height: 100%;
+        border-width: var(--draw-line-width);
+      }
+
+      .custom-field.three input:not(:placeholder-shown) ~ .border::before,
+      .custom-field.three input.dirty ~ .border::before,
+      .custom-field.three input:focus ~ .border::before {
+        transition-delay: 0s, var(--draw-duration), 0s;
+      }
+
+      .custom-field.three input:not(:placeholder-shown) ~ .border::after,
+      .custom-field.three input.dirty ~ .border::after,
+      .custom-field.three input:focus ~ .border::after {
+        transition-delay: calc(var(--draw-duration) * 2),
+          calc(var(--draw-duration) * 3), calc(var(--draw-duration) * 2);
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      class="jsbin"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+    ></script>
+  </head>
+  <body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    <form method="POST" enctype="multipart/form-data">
+      <div class="file-upload">
+        <button
+          class="file-upload-btn"
+          type="button"
+          onclick="$('.file-upload-input').trigger( 'click' )"
+        >
+          Add songs
+        </button>
+
+        <div class="image-upload-wrap">
+          <input
+            class="file-upload-input"
+            type="file"
+            name="song"
+            onchange="readURL(this);"
+            accept="audio/*"
+          />
+          <div class="drag-text">
+            <h3>Drag and drop a file or select add songs</h3>
+          </div>
+        </div>
+        <div class="file-upload-content">
+          <audio class="file-upload-image" controls>
+            <source id="video_here" />
+            Your browser does not support HTML5 video.
+          </audio>
+          <br />
+          <label class="custom-field one">
+            <input type="text" name="title" placeholder=" " />
+            <span class="placeholder">Enter song's title</span>
+          </label>
+          <br />
+          <label class="custom-field three">
+            <input type="text" name="artist" placeholder="&nbsp;" />
+            <span class="placeholder">Enter artirt's name</span>
+            <span class="border"></span>
+          </label>
+          <div class="image-title-wrap">
+            <button type="button" onclick="removeUpload()" class="remove-image">
+              Remove <span class="image-title">Uploaded Image</span>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="file-upload-btn" id="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          $("#submit").show();
+          $(".image-upload-wrap").hide();
+          $("#video_here").attr("src", URL.createObjectURL(input.files[0]));
+          $(".file-upload-content").show();
+          $(".image-title").html(input.files[0].name);
+          $("#video_here").parent()[0].load();
+        } else {
+          removeUpload();
+        }
+      }
+
+      function removeUpload() {
+        $("#submit").hide();
+        $(".file-upload-input").replaceWith($(".file-upload-input").clone());
+        $(".file-upload-content").hide();
+        $(".image-upload-wrap").show();
+      }
+
+      $("#submit").hide();
+      $(".image-upload-wrap").bind("dragover", function () {
+        $(".image-upload-wrap").addClass("image-dropping");
+      });
+      $(".image-upload-wrap").bind("dragleave", function () {
+        $(".image-upload-wrap").removeClass("image-dropping");
+      });
+    </script>
+  </body>
+</html>

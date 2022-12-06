@@ -16,6 +16,12 @@ skaffold dev --no-prune=false --cache-artifacts=false
 skaffold dev --no-prune=false --cache-artifacts=false --module train-mnist
 ```
 
+## Note Poetry
+
+When generating root's project lock file, lock file might not include
+subproject's dependencies when subproject's doesn't already have a lock file.
+Might also appear when there are inter projects' dependencies later.
+
 ## Troubleshooting
 
 ### Error: Error creating NodePool

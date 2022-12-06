@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fingerprinter
+  labels:
+    app: fingerprinter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fingerprinter
+  template:
+    metadata:
+      labels:
+        app: fingerprinter
+    spec:
+      containers:
+        - name: fingerprinter
+          image: europe-docker.pkg.dev/pbl6-363916/mirror/neural-fp
+          imagePullPolicy: Always
+          command:
+            - "gunicorn"
+            - "app.server.wsgi:app"
+          args:
+            - "--bind"
+            - "0.0.0.0:5000"
+            - "-w"
+            - "2"
+            - "-t"
+            - "1000"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: INDEXER_URL
+              value: http://indexer.indexer.svc.cluster.local
+            - name: SONGS_UPLOADER_URL
+              value: http://songs-uploader.songs-uploader.svc.cluster.local
+            - name: CHECKPOINT_URI
+              value: mlflow-artifacts:/1/881d9e9317f443018f0298672a815ca4/artifacts/checkpoint
+            - name: MLFLOW_TRACKING_URI
+              value: http://mlflow.mlflow.svc.cluster.local
+            - name: DB_HOST
+              value: mariadb.mariadb.svc.cluster.local
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: DB_NAME
+              value: "song_indexes"
+            - name: INDEX_DB_URI
+              value: mysql+pymysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            failureThreshold: 3
+            periodSeconds: 60
+            timeoutSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 120
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi

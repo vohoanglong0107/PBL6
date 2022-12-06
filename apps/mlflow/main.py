@@ -82,6 +82,8 @@ def start_server(args):
         cmd.extend(["--port", args.port])
     if args.workers:
         cmd.extend(["--workers", args.workers])
+    if args.gunicorn_opts:
+        cmd.extend(["--gunicorn-opts", args.gunicorn_opts])
     # run mlflow server and capture output
     logger.info("Starting mlflow server")
 
@@ -111,6 +113,7 @@ if __name__ == "__main__":
     parser.add_argument("--port", default="5000")
     parser.add_argument("--workers", default="1")
     parser.add_argument("--static-prefix", default="/")
+    parser.add_argument("--gunicorn-opts", default=None)
 
     args = parser.parse_args()
     main(args)

@@ -5,4 +5,5 @@ resources:
   - "mlflow"
   - "argo"
   - "web"
+  - "songs-uploader"
 namePrefix: own-host-

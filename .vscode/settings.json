@@ -1,0 +1,42 @@
+{
+  "editor.tabSize": 2,
+  "python.formatting.provider": "black",
+  "cSpell.words": [
+    "arange",
+    "argmin",
+    "astype",
+    "clsx",
+    "commitlint",
+    "dtype",
+    "frombuffer",
+    "hadolint",
+    "IFFT",
+    "loguru",
+    "manypkg",
+    "mininterval",
+    "oneshot",
+    "ptrace",
+    "rmse",
+    "sampwidth",
+    "savez",
+    "scipy",
+    "seccomp",
+    "segs",
+    "snrs",
+    "tdqm",
+    "tomli",
+    "tqdm",
+    "trainset",
+    "wavio"
+  ],
+  "cSpell.ignoreWords": [
+    "esbenp",
+    "eamodio",
+    "mhutchie",
+    "donjayamanne",
+    "githistory",
+    "tamasfe",
+    "mnist"
+  ],
+  "python.analysis.typeCheckingMode": "basic"
+}
