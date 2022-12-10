@@ -1,0 +1,92 @@
+.Box {
+  width: 100%;
+  margin: auto;
+  transform: translateY(200px);
+}
+.Audio {
+  margin: auto;
+  width: 60%;
+}
+.Btn {
+  // width: 80%;
+  // margin-top: 20px;
+  // margin-left: 37%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.BtnRecord {
+  text-decoration: none;
+  color: white;
+  background-color: #326bd4;
+  padding: 15px 30px;
+  border-radius: 20px;
+  margin: 0 5px;
+  width: 190px;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s;
+}
+.BtnRecord:hover,
+.BtnRecord:active {
+  background-color: #222eb1;
+}
+.BtnStop {
+  text-decoration: none;
+  color: white;
+  background-color: #326bd4;
+  padding: 15px 30px;
+  border-radius: 20px;
+  margin: 0 5px;
+  width: 190px;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.BtnStop:hover,
+.BtnStop:active {
+  background-color: #222eb1;
+}
+.BtnReset {
+  text-decoration: none;
+  color: white;
+  background-color: #326bd4;
+  padding: 15px 30px;
+  border-radius: 20px;
+  margin: 0 5px;
+  width: 190px;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.BtnReset:hover,
+.BtnReset:active {
+  background-color: #222eb1;
+}
+.BtnSend {
+  text-decoration: none;
+  color: white;
+  background-color: #326bd4;
+  padding: 15px 30px;
+  border-radius: 20px;
+  margin: 0 5px;
+  width: 190px;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.BtnSend:hover,
+.BtnSend:active {
+  background-color: #222eb1;
+}
+.Paragraph {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}

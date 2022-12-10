@@ -19,11 +19,13 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@manypkg/cli": "^0.19.2",
+    "audio-react-recorder": "^1.0.4",
     "clsx": "^1.2.1",
     "eslint-config-custom": "*",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "react-router-dom": "^6.4.3",
     "turbo": "^1.5.5"
   },
   "packageManager": "npm@8.15.0",
