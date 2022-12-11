@@ -51,7 +51,7 @@ export default function ShowResult() {
               </div>
             </div>
           </div>
-          <form onSubmit={handleUploadClick}>
+          <form onSubmit={handleUploadClick} className = "my-4">
             <div className={styles.UploadFile}>
               <label className={styles.Label1} htmlFor="Label1">
                 Click the side button to upload file

@@ -3,7 +3,7 @@ import React from "react";
 export default function SupportList() {
   return (
     <>
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <div className="overflow-x-auto my-8 mx-4 relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <caption className="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
             Our Support Audio List

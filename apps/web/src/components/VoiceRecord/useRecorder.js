@@ -29,7 +29,7 @@ const useRecorder = () => {
     recorder.addEventListener("dataavailable", handleData);
     return () => recorder.removeEventListener("dataavailable", handleData);
   }, [recorder, isRecording]);
-
+  
   const startRecording = () => {
     setIsRecording(true);
   };

@@ -2,7 +2,6 @@
 .Section {
   .Content {
     width: 100%;
-    display: flex;
     padding: 200 120 100 120;
 
     .ContentRight {
@@ -14,8 +13,48 @@
     }
   }
 }
-@media screen and (max-width: 1000px) {
-  .Logo2 {
-    display: none;
+/* PC*/
+@media (min-width: 1024px){
+  .Section {
+    height: 100%;
+    .Content {
+      display: flex;
+      .ContentRight {
+        width: 30%;
+        .Logo2 {
+          width: 100%;
+          flex-direction: column;
+        }
+      }
+    }
   }
+
 }
+
+/* tablet*/
+@media (min-width: 740px) and (max-width: 1024px) {
+  .Section {
+    height: 100%;
+    .Content {
+      .ContentRight {
+        display: none;
+      }
+    }
+  }
+  
+}
+
+/* mobile*/
+@media (max-width: 740px) {
+  .Section {
+    height: 100%;
+    .Content {
+      .ContentRight {
+        display: none;
+        }
+      }
+    }
+  }
+
+
+

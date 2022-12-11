@@ -8,6 +8,4 @@ export default {
   component: VoiceRecord,
 } as ComponentMeta<typeof VoiceRecord>;
 
-export const Primary: ComponentStory<typeof VoiceRecord> = () => (
-  <VoiceRecord />
-);
+export const Primary: ComponentStory<typeof VoiceRecord> = () => <VoiceRecord />;
