@@ -9,7 +9,7 @@ export default function AboutUs() {
   return (
     <>
       <div className={styles.AboutUs}>
-        <div className=" max-w-sm mt-20 ml-10 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500 ">
+        <div className=" max-w-sm mt-5 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500 ">
           <a href="#">
             <Image className={styles.avt} src={Long} alt="namphoto" />
           </a>
@@ -28,7 +28,7 @@ export default function AboutUs() {
           </div>
         </div>
 
-        <div className=" max-w-sm mt-20 ml-10 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500">
+        <div className=" max-w-sm mt-5 ml-10 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500">
           <a href="#">
             <Image className={styles.avt} src={Huy} alt="namphoto" />
           </a>
@@ -47,7 +47,7 @@ export default function AboutUs() {
           </div>
         </div>
 
-        <div className=" max-w-sm mt-20 ml-10 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500">
+        <div className=" max-w-sm mt-5 ml-10 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500">
           <a href="#">
             <Image className={styles.avt} src={Nam} alt="namphoto" />
           </a>

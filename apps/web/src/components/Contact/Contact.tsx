@@ -7,7 +7,7 @@ export default function Contact() {
       <div className={styles.Contact}>
         <label
           htmlFor="email-address-icon"
-          className="block mb-3 text-sm font-medium text-gray-900 dark:text-white "
+          className="block mb-3  text-sm font-medium  dark:text-gray-700 "
         >
           Your Email
         </label>
@@ -34,7 +34,7 @@ export default function Contact() {
 
         <label
           htmlFor="message"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mb-3"
+          className="block mb-3  text-sm font-medium  dark:text-gray-700"
         >
           Your message
         </label>
