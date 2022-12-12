@@ -83,6 +83,17 @@ export default function Navbar() {
               style={{ marginRight: "15px", fontSize: "30px" }}
             >
               <a
+                href="/voicerecord"
+                className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
+              >
+                Voice Record
+              </a>
+            </li>
+            <li
+              className="mb-3 lg:px-2 xl:px-2 lg:mb-0"
+              style={{ marginRight: "15px", fontSize: "30px" }}
+            >
+              <a
                 href="/supportlist"
                 className="text-sm font-medium text-gray-900 hover:text-blue-600  dark:hover:text-blue-500"
               >
