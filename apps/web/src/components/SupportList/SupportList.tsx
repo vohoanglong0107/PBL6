@@ -1,6 +1,43 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "@/api/axios";
+const getListSong = () => axios.get("/songs");
 
 export default function SupportList() {
+  const [Songs, setSongs] = useState<any[]>([]);
+  const [query, setQuery] = useState("");
+  const search = (data: any) => {
+    return data.filter(
+      (item: any) =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.artist.toLowerCase().includes(query.toLowerCase())
+    );
+  };
+  const fetchSong = async () => {
+    try {
+      await getListSong().then((res: any) => {
+        console.log(res);
+        console.log(res.data);
+        setSongs(
+          res.data.map((data: any) => {
+            return {
+              id: data.id,
+              artist: data.artist,
+              title: data.title,
+              url: data.url,
+            };
+          })
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchSong();
+  }, []);
+
+  const numAscending = [...Songs].sort((a, b) => (a.title > b.title ? 1 : -1));
+
   return (
     <>
       <div className="overflow-x-auto my-8 mx-4 relative shadow-md sm:rounded-lg">
@@ -10,8 +47,8 @@ export default function SupportList() {
             <p className="mt-1 mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">
               We cannot provide service to all songs, but you can check if the
               song you are looking for is supported in this list by typing the
-              name, or artist, or album in the search field below. The list of
-              supported songs will be updated regularly.
+              title, or artist in the search field below. The list of supported
+              songs will be updated regularly.
             </p>
             <form className="flex items-center">
               <label htmlFor="simple-search" className="sr-only">
@@ -37,8 +74,9 @@ export default function SupportList() {
                   type={"text"}
                   id="simple-search"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Songs, Artists, Albums, ...."
+                  placeholder="Songs, Artists"
                   required
+                  onChange={(e) => setQuery(e.target.value)}
                 />
               </div>
               <button
@@ -64,110 +102,37 @@ export default function SupportList() {
             </form>
           </caption>
 
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
             <tr>
+              <th scope="col" className="py-4 px-6">
+                Order
+              </th>
               <th scope="col" className="py-4 px-6">
                 Song Name
               </th>
               <th scope="col" className="py-4 px-6">
                 Artist
               </th>
-              <th scope="col" className="py-4 px-6">
-                Album
-              </th>
             </tr>
           </thead>
+
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Blank Space
-              </th>
-              <td className="py-4 px-6">Taylor Swift</td>
-              <td className="py-4 px-6">1989</td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Shake It Off
-              </th>
-              <td className="py-4 px-6">Taylor Swift</td>
-              <td className="py-4 px-6">1989</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Style
-              </th>
-              <td className="py-4 px-6">Taylor Swift</td>
-              <td className="py-4 px-6">1989</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                7 Rings
-              </th>
-              <td className="py-4 px-6">Ariana Grande</td>
-              <td className="py-4 px-6">Thank you, next</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Thank you, next
-              </th>
-              <td className="py-4 px-6">Ariana Grande</td>
-              <td className="py-4 px-6">Thank you, next</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                imagine
-              </th>
-              <td className="py-4 px-6">Ariana Grande</td>
-              <td className="py-4 px-6">Thank you, next</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Good 4 U
-              </th>
-              <td className="py-4 px-6">Olivia Rodrigo</td>
-              <td className="py-4 px-6">Sour</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                deja vu
-              </th>
-              <td className="py-4 px-6">Olivia Rodrigo</td>
-              <td className="py-4 px-6">Sour</td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                drivers license
-              </th>
-              <td className="py-4 px-6">Olivia Rodrigo</td>
-              <td className="py-4 px-6">Sour</td>
-            </tr>
+            {search(numAscending).map((data: any, index: any) => (
+              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                <th
+                  scope="row"
+                  className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm "
+                >
+                  {index + 1}
+                </th>
+                <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm">
+                  {data.title}
+                </td>
+                <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm">
+                  {data.artist}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

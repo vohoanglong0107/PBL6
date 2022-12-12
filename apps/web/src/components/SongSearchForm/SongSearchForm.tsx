@@ -1,7 +1,18 @@
 import Router, { useRouter } from "next/router";
 import React, { useState } from "react";
+import axios from "@/api/axios";
 import styles from "./SongSearchForm.module.scss";
+import FormData from "form-data";
+
 export default function SongSearchForm() {
+  const predictSong = async () => {
+    var form = new FormData();
+    form.append("query", file);
+    return await axios
+      .get("/predictions", { data: form })
+      .then((res) => console.log(res));
+  };
+
   const [file, setFile] = useState<File>();
   const router = useRouter();
 
@@ -15,8 +26,9 @@ export default function SongSearchForm() {
 
   const handleUploadClick = (e: any) => {
     e.preventDefault();
-    router.push("/showresult");
-    console.log("success");
+    predictSong().then(() => router.push("/showresult"));
+    // router.push("/showresult");
+    // console.log("success");
   };
   return (
     <>
