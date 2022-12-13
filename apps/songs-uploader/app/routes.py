@@ -49,7 +49,7 @@ def songs_api():
     return jsonify([song.as_dict() for song in songs])
 
 
-@app.route("/api/predictions", methods=["GET"])
+@app.route("/api/predictions", methods=["GET", "POST"])
 def predictions():
     query = request.files["query"]
     query = convert_to_wav_8000hz_format(query)
