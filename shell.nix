@@ -11,6 +11,7 @@ myAppEnv.env.overrideAttrs (oldAttrs: {
     nodejs-16_x
     google-cloud-sdk
     kubectl
+    kustomize
     argo
     argocd
     terraform

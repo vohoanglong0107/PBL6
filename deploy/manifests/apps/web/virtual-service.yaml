@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: web
+spec:
+  gateways:
+    - istio-ingress/cluster-gateway
+  hosts:
+    - "pbl6.mamlong34.monster"
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: web
+            port:
+              number: 80

@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web
+  namespace: argocd
+spec:
+  destination:
+    namespace: web
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deploy/manifests/apps/web
+    repoURL: https://github.com/vohoanglong0107/PBL6
+    targetRevision: main
