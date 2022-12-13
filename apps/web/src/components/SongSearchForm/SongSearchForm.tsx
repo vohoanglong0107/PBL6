@@ -9,7 +9,7 @@ export default function SongSearchForm() {
     var form = new FormData();
     form.append("query", file);
     return await axios
-      .get("/predictions", { data: form })
+      .post("/predictions", { data: form })
       .then((res) => console.log(res));
   };
 
