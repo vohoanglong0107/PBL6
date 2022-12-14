@@ -116,12 +116,10 @@ export default function SupportList() {
             </tr>
           </thead>
 
+
           <tbody>
             {search(numAscending).map((data: any, index: any) => (
-              <tr
-                key={data.id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center"
-              >
+              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                 <th
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white text-sm "

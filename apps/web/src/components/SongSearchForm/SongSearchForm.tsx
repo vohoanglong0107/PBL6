@@ -1,22 +1,33 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import axios from "@/api/axios";
 import styles from "./SongSearchForm.module.scss";
+import FormData from "form-data";
+
 export default function SongSearchForm() {
+  const predictSong = () => {
+    var form = new FormData();
+    form.append("query", file);
+    return axios.post("/predictions", form);
+  };
+
   const [file, setFile] = useState<File>();
   const router = useRouter();
 
   const handleFileChange = (e: any) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
-      console.log("success");
-      console.log(e.target.files);
     }
   };
 
   const handleUploadClick = (e: any) => {
     e.preventDefault();
-    router.push("/showresult");
-    console.log("success");
+    predictSong().then((results) =>
+      router.push({
+        pathname: "/showresult",
+        query: { results: JSON.stringify({ data: results["data"] }) },
+      })
+    );
   };
   return (
     <>
@@ -45,7 +56,7 @@ export default function SongSearchForm() {
                 type={"file"}
                 className={styles.Button1}
                 onChange={handleFileChange}
-                accept={".mp3, .mp4, wav"}
+                accept={".mp3, .mp4, .wav"}
                 required
               />
               <button className={styles.Button2}>Gửi</button>
