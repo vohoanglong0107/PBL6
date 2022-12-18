@@ -1,9 +1,34 @@
+import axios from "@/api/axios";
 import * as React from "react";
 import useRecorder from "./useRecorder";
 import styles from "./VoiceRecord.module.scss";
+import FormData from "form-data";
+import { useRouter } from "next/router";
+
+
 
 export default function VoiceRecord() {
-  let { audioURL, isRecording, startRecording, stopRecording } = useRecorder();
+ 
+  let { audioURL, audioBlob, isRecording, startRecording, stopRecording } = useRecorder();
+  const refreshPage = () => {
+      window.location.reload();
+  };
+  const router = useRouter();
+  const predictSong = () => {
+    var form = new FormData();
+    const file = new File([audioBlob], "song")
+    console.log(file)
+    form.append("query", file);
+    return axios.post('/predictions', form);
+  };
+  const handleUploadClick = (e: any) => {
+    predictSong().then((results) =>
+      router.push({
+        pathname: "/showresult",
+        query: { results: JSON.stringify({ data : results["data"]})}
+      })
+    )
+  }
 
   return (
     <section className={styles.Section}>
@@ -24,18 +49,10 @@ export default function VoiceRecord() {
           >
             Stop recording
           </button>
-          <button
-            onClick={stopRecording}
-            disabled={!isRecording}
-            className={styles.BtnReset}
-          >
+          <button onClick={refreshPage} className={styles.BtnReset}>
             Reset
           </button>
-          <button
-            onClick={stopRecording}
-            disabled={!isRecording}
-            className={styles.BtnSend}
-          >
+          <button onClick={handleUploadClick} className={styles.BtnSend}>
             Send
           </button>
         </div>
