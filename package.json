@@ -26,6 +26,8 @@
     "axios": "^1.2.1",
     "clsx": "^1.2.1",
     "eslint-config-custom": "*",
+    "extendable-media-recorder": "^7.0.3",
+    "extendable-media-recorder-wav-encoder": "^7.0.80",
     "form-data": "^4.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
