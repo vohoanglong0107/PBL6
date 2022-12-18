@@ -1,0 +1,16 @@
+.git
+.github
+.husky
+.vscode
+data
+deploy
+node_modules
+notebooks
+scripts
+*/*/.next
+*/*/.storybook
+*/*/.swc
+*/*/.turbo
+*/*/coverage
+*/*/Dockerfile
+
