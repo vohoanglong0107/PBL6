@@ -1,0 +1,5 @@
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
+    name: RELATED_IMAGE_kiali_default
+    value: my.internal.registry.io/mykiali/mykialiserver:v1.50.0

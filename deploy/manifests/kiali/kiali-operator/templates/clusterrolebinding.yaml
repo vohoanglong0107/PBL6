@@ -1,0 +1,23 @@
+---
+# Source: kiali-operator/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kiali-operator
+  labels:
+    helm.sh/chart: kiali-operator-1.54.0
+    app: kiali-operator
+    app.kubernetes.io/name: kiali-operator
+    app.kubernetes.io/instance: kiali-operator
+    version: "v1.54.0"
+    app.kubernetes.io/version: "v1.54.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: "kiali-operator"
+subjects:
+  - kind: ServiceAccount
+    name: kiali-operator
+    namespace: kiali-operator
+roleRef:
+  kind: ClusterRole
+  name: kiali-operator
+  apiGroup: rbac.authorization.k8s.io

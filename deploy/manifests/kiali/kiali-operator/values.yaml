@@ -1,0 +1,4 @@
+image:
+  repo: europe-docker.pkg.dev/pbl6-363916/mirror/kiali-operator
+  tag: v1.54.0
+allowAdHocKialiImage: true
