@@ -1,0 +1,89 @@
+---
+# Source: kiali-operator/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiali-operator
+  namespace: kiali-operator
+  labels:
+    helm.sh/chart: kiali-operator-1.54.0
+    app: kiali-operator
+    app.kubernetes.io/name: kiali-operator
+    app.kubernetes.io/instance: kiali-operator
+    version: "v1.54.0"
+    app.kubernetes.io/version: "v1.54.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: "kiali-operator"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kiali-operator
+      app.kubernetes.io/instance: kiali-operator
+  template:
+    metadata:
+      name: kiali-operator
+      namespace: kiali-operator
+      labels:
+        # required for the operator SDK metric service selector
+        name: kiali-operator
+        helm.sh/chart: kiali-operator-1.54.0
+        app: kiali-operator
+        app.kubernetes.io/name: kiali-operator
+        app.kubernetes.io/instance: kiali-operator
+        version: "v1.54.0"
+        app.kubernetes.io/version: "v1.54.0"
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: "kiali-operator"
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: kiali-operator
+      containers:
+        - name: operator
+          image: "europe-docker.pkg.dev/pbl6-363916/mirror/kiali-operator:v1.54.0"
+          imagePullPolicy: Always
+          args:
+            - "--zap-log-level=info"
+            - "--leader-election-id=kiali-operator"
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            runAsNonRoot: true
+          volumeMounts:
+            - mountPath: /tmp/ansible-operator/runner
+              name: runner
+          env:
+            - name: WATCH_NAMESPACE
+              value: ""
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: ALLOW_AD_HOC_KIALI_NAMESPACE
+              value: "true"
+            - name: ALLOW_AD_HOC_KIALI_IMAGE
+              value: "true"
+            - name: PROFILE_TASKS_TASK_OUTPUT_LIMIT
+              value: "100"
+            - name: ANSIBLE_DEBUG_LOGS
+              value: "true"
+            - name: ANSIBLE_VERBOSITY_KIALI_KIALI_IO
+              value: "1"
+            - name: ANSIBLE_CONFIG
+              value: "/etc/ansible/ansible.cfg"
+          ports:
+            - name: http-metrics
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+      volumes:
+        - name: runner
+          emptyDir: {}
+      affinity: {}

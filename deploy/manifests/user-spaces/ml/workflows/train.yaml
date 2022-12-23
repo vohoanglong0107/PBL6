@@ -26,13 +26,7 @@ spec:
         image: europe-docker.pkg.dev/pbl6-363916/mirror/neural-fp
         imagePullPolicy: Always
         command: ["python3", "-m"]
-        args:
-          [
-            "app.main",
-            "train",
-            "--experiment",
-            "pbl6",
-          ]
+        args: ["app.main", "train", "--experiment", "pbl6"]
         env:
           - name: MLFLOW_TRACKING_URI
             value: http://mlflow.mlflow.svc.cluster.local
@@ -52,3 +46,10 @@ spec:
             value: "320"
           - name: OPTIMIZER
             value: "LAMB"
+        resources:
+          requests:
+            memory: 4Gi
+            cpu: 1
+          limits:
+            memory: 6Gi
+            cpu: 2
