@@ -1,7 +1,6 @@
 import styles from "./ShowResult.module.scss";
-import {  useRouter } from "next/router";
-import React, { useMemo, } from "react";
-
+import { useRouter } from "next/router";
+import React, { useMemo } from "react";
 
 interface Result {
   artist: string;
@@ -13,14 +12,13 @@ interface Props {
   results: Result[];
 }
 
-
 export default function ShowResult({ results }: Props) {
   const router = useRouter();
   const handleClick = (e: any) => {
-  router.push({
-    pathname: "/"
-  })
-}
+    router.push({
+      pathname: "/",
+    });
+  };
   const max5Results = useMemo(() => results.slice(0, 5), [results]);
   return (
     <>
@@ -55,7 +53,7 @@ export default function ShowResult({ results }: Props) {
             </div>
           </div>
         </section>
-        <div className="container py-10 px-10 mx-0 min-w-full flex flex-col items-center mt-5">
+        <div className="container py-50 px-10 mx-0 min-w-full flex flex-col items-center ">
           <button
             type="button"
             onClick={handleClick}

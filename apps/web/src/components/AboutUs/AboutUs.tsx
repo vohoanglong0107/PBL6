@@ -14,7 +14,7 @@ export default function AboutUs() {
             <Image className={styles.avt} src={Long} alt="namphoto" />
           </a>
           <div className="p-5">
-            <a href="#">
+            <a href="https://www.facebook.com/long.ngu.9889">
               <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-center">
                 Vo Hoang Long
               </h5>
@@ -33,7 +33,7 @@ export default function AboutUs() {
             <Image className={styles.avt} src={Huy} alt="namphoto" />
           </a>
           <div className="p-5">
-            <a href="#">
+            <a href="https://www.facebook.com/Huyhk1">
               <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-center">
                 Nguyen Ngoc Huy
               </h5>
@@ -48,7 +48,7 @@ export default function AboutUs() {
         </div>
 
         <div className=" max-w-sm mt-5 ml-10 bg-blue-300 rounded-lg border border-gray-800 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-500">
-          <a href="#">
+          <a href="https://www.facebook.com/Ndnam.621/">
             <Image className={styles.avt} src={Nam} alt="namphoto" />
           </a>
           <div className="p-5">

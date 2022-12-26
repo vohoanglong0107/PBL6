@@ -1,28 +1,27 @@
-#root{
+#root {
   height: 900px;
 }
-.Section{
-  height: 620px;
-
+.Section {
+  height: 680px;
 }
 .Box {
-    width: 100%;
-    margin: auto;
-    transform: translateY(200px);
-    padding: 60px;
-    margin-top: -150px;
-  }
+  width: 100%;
+  margin: auto;
+  transform: translateY(200px);
+  padding: 60px;
+  margin-top: -150px;
+}
 .Audio {
-    margin: auto;
-    width: 60%;
-    border: 3px solid;
-    border-color: darkgray;
-    border-radius: 32px;
+  margin: auto;
+  width: 60%;
+  border: 3px solid;
+  border-color: darkgray;
+  border-radius: 32px;
 }
 .Btn {
-    // width: 80%;
-    // margin-top: 20px;
-    // margin-left: 37%;
+  // width: 80%;
+  // margin-top: 20px;
+  // margin-left: 37%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,12 +96,12 @@
 }
 .Paragraph {
   font-size: 20px;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
-.Text{
-  color: rgba(20, 33, 61,0.65);
+.Text {
+  color: rgba(20, 33, 61, 0.65);
 }
