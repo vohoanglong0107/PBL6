@@ -5,7 +5,7 @@ metadata:
   labels:
     app: songs-uploader
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: songs-uploader
@@ -23,7 +23,7 @@ spec:
             - "--bind"
             - "0.0.0.0:5000"
             - "-w"
-            - "4"
+            - "2"
             - "--worker-class"
             - "gevent"
           ports:
@@ -53,6 +53,14 @@ spec:
               value: pbl6-363916-europe-central2-dataset-859a
             - name: FINGERPRINTER_URL
               value: http://fingerprinter.fingerprinter.svc.cluster.local/predictions
+            - name: CACHE_TYPE
+              value: RedisCache
+            - name: CACHE_REDIS_HOST
+              value: "10.177.235.172"
+            - name: CACHE_REDIS_PORT
+              value: "6378"
+            - name: CACHE_DEFAULT_TIMEOUT
+              value: "300"
           livenessProbe:
             httpGet:
               path: /healthz
@@ -74,8 +82,8 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 128Mi
             limits:
-              cpu: 200m
+              cpu: 400m
               memory: 512Mi

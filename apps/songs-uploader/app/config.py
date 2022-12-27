@@ -29,8 +29,13 @@ class Config:
 
     FINGERPRINTER_URL = environ.get("FINGERPRINTER_URL")
 
+    CACHE_TYPE = environ.get("CACHE_TYPE")
+    CACHE_REDIS_HOST = environ.get("CACHE_REDIS_HOST")
+    CACHE_REDIS_PORT = environ.get("CACHE_REDIS_PORT")
+    CACHE_DEFAULT_TIMEOUT = environ.get("CACHE_DEFAULT_TIMEOUT")
 
-class ProductionConfig(Config):
+
+class ProductionConfigkConfigk:
     pass
 
 

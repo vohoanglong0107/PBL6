@@ -3,7 +3,7 @@ import requests
 from flask import flash, jsonify, redirect, render_template, request
 from loguru import logger
 
-from .app import app
+from .app import app, cache
 from .db import db
 from .models import Song
 from .utils import convert_to_wav_8000hz_format, get_gcs_bucket, upload_to_gcs
@@ -38,12 +38,14 @@ def index():
 
 
 @app.route("/songs", methods=["GET"])
+@cache.cached(timeout=50)
 def songs():
     songs = db.session.execute(db.select(Song)).scalars().all()
     return render_template("songs.html", songs=songs)
 
 
 @app.route("/api/songs", methods=["GET"])
+@cache.cached(timeout=50)
 def songs_api():
     songs = db.session.execute(db.select(Song)).scalars().all()
     return jsonify([song.as_dict() for song in songs])
